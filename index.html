@@ -1,25 +1,23 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TechNova Store</title>
-  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Cooper+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero">
-    <nav class="navbar">
+  <header class="top-bar">
+    <nav>
       <ul>
-        <li><a href="mas-vendido.html" data-key="masVendido">Lo más vendido</a></li>
-        <li><a href="ofertas.html" data-key="ofertas">Ofertas</a></li>
-        <li><a href="nuevo.html" data-key="loNuevo">Lo Nuevo</a></li>
-        <li><a href="personalizados.html" data-key="personalizados">Productos personalizados</a></li>
-        <li><a href="contacto.html" data-key="contacto">Contáctanos</a></li>
-        <li><a href="nosotros.html" data-key="nosotros">Sobre nosotros</a></li>
-        <li><a href="carrito.html">
-          <img src="img/carrito.png" alt="Carrito" class="icono-carrito">
-        </a></li>
+        <li><a href="#">Lo más vendido</a></li>
+        <li><a href="#">Ofertas</a></li>
+        <li><a href="#">Lo Nuevo</a></li>
+        <li><a href="#">Productos personalizados</a></li>
+        <li><a href="#">Contáctanos</a></li>
+        <li><a href="#">Sobre nosotros</a></li>
+        <li><a href="#"><img src="img/carrito.png" alt="Carrito" class="carrito-icon"></a></li>
         <li>
           <select id="selectorIdioma">
             <option value="es">ES</option>
@@ -28,81 +26,82 @@
         </li>
       </ul>
     </nav>
-    <div class="titulo-container">
-      <h1 class="titulo">TechNova Store</h1>
-    </div>
   </header>
 
-  <main>
+  <div class="hero-titulo">
+    <h1>TechNova Store</h1>
+  </div>
+
+  <main class="contenedor-productos">
     <section class="productos-grid">
-      <!-- PRODUCTOS -->
+      <!-- 12 productos -->
       <div class="producto">
         <img src="img/auriculares.jpg" alt="Auriculares 360">
-        <h2>Auriculares 360</h2>
-        <p>Audio envolvente Hi-Fi con cancelación de ruido.</p>
+        <h3>Auriculares 360</h3>
+        <p>Audio envolvente con cancelación de ruido.</p>
       </div>
       <div class="producto">
         <img src="img/smartwatch.jpg" alt="Smartwatch FitMax">
-        <h2>Smartwatch FitMax</h2>
-        <p>Monitor de salud, GPS y resistencia al agua.</p>
+        <h3>Smartwatch FitMax</h3>
+        <p>GPS, monitor de salud y sumergible.</p>
       </div>
       <div class="producto">
-        <img src="img/teclado.jpg" alt="Teclado Mecánico RGB">
-        <h2>Teclado Mecánico RGB</h2>
-        <p>Retroiluminado, switches silenciosos.</p>
+        <img src="img/teclado.jpg" alt="Teclado RGB">
+        <h3>Teclado RGB</h3>
+        <p>Mecánico silencioso, retroiluminado.</p>
       </div>
       <div class="producto">
         <img src="img/dron.jpg" alt="Dron SkyEye">
-        <h2>Dron SkyEye</h2>
-        <p>Grabación 4K y control remoto hasta 2km.</p>
+        <h3>Dron SkyEye</h3>
+        <p>Grabación 4K, 2 km de alcance.</p>
       </div>
       <div class="producto">
         <img src="img/laptop.jpg" alt="Laptop X-Light">
-        <h2>Laptop X-Light</h2>
-        <p>Ultraliviana con procesador i7 de 12ª generación.</p>
+        <h3>Laptop X-Light</h3>
+        <p>i7 12ª gen, ultradelgada y veloz.</p>
       </div>
       <div class="producto">
         <img src="img/camara.jpg" alt="Cámara VlogPro">
-        <h2>Cámara VlogPro</h2>
-        <p>Ideal para creadores de contenido y vloggers.</p>
+        <h3>Cámara VlogPro</h3>
+        <p>Perfecta para creadores de contenido.</p>
       </div>
       <div class="producto">
         <img src="img/monitor.jpg" alt="Monitor UltraWide">
-        <h2>Monitor UltraWide</h2>
-        <p>Pantalla curva 34" con resolución QHD.</p>
+        <h3>Monitor UltraWide</h3>
+        <p>Curvo, 34" QHD para multitarea.</p>
       </div>
       <div class="producto">
         <img src="img/proyector.jpg" alt="Proyector CineCasa">
-        <h2>Proyector CineCasa</h2>
-        <p>Cine en casa con resolución Full HD y 250" de imagen.</p>
+        <h3>Proyector CineCasa</h3>
+        <p>Full HD, hasta 250" de imagen.</p>
       </div>
       <div class="producto">
         <img src="img/tablet.jpg" alt="Tablet GraphX">
-        <h2>Tablet GraphX</h2>
-        <p>Ideal para diseño gráfico y productividad.</p>
+        <h3>Tablet GraphX</h3>
+        <p>Diseño y productividad con stylus.</p>
       </div>
       <div class="producto">
-        <img src="img/cargador.jpg" alt="Cargador Solar Portátil">
-        <h2>Cargador Solar Portátil</h2>
-        <p>Carga tus dispositivos donde sea con energía solar.</p>
+        <img src="img/cargador.jpg" alt="Cargador Solar">
+        <h3>Cargador Solar</h3>
+        <p>10000mAh, energía donde sea.</p>
       </div>
       <div class="producto">
         <img src="img/cascos-vr.jpg" alt="Cascos VR Pro">
-        <h2>Cascos VR Pro</h2>
-        <p>Experiencia inmersiva en videojuegos y realidad virtual.</p>
+        <h3>Cascos VR Pro</h3>
+        <p>Realidad virtual inmersiva 360°.</p>
       </div>
       <div class="producto">
         <img src="img/speaker.jpg" alt="Bocina Bluetooth Max">
-        <h2>Bocina Bluetooth Max</h2>
-        <p>Gran potencia y duración de batería.</p>
+        <h3>Bocina Bluetooth Max</h3>
+        <p>Potente y con batería de larga duración.</p>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="footer-contenido">
-      <p>&copy; 2025 TechNova Store | contacto@technova.com | +52 123 456 7890</p>
-      <p>Todos los derechos reservados.</p>
+      <p>&copy; 2025 TechNova Store</p>
+      <p>Contacto: contacto@technova.com | +52 123 456 7890</p>
     </div>
   </footer>
 
