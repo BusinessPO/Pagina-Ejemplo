@@ -2,109 +2,193 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TechNova Store</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cooper+Black&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda TecPro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://www.transparenttextures.com/patterns/beige-paper.png');
+      background-color: #f0ebe3;
+    }
+
+    header {
+      background-color: #ffffffcc;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #444;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #d6ccc2;
+    }
+
+    #idioma {
+      padding: 6px;
+    }
+
+    .titulo-container {
+      background: url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?fit=crop&w=1200&q=80') no-repeat center;
+      background-size: cover;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 3rem;
+      color: white;
+      margin: 0;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .producto {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ccc;
+      overflow: hidden;
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .producto:hover {
+      transform: scale(1.03);
+    }
+
+    .producto img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .producto h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      color: #444;
+      margin: 10px 0 5px;
+    }
+
+    .producto p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0 10px 15px;
+    }
+
+    footer {
+      background-color: #d6ccc2;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <header class="top-bar">
+
+  <header>
     <nav>
-      <ul>
-        <li><a href="#">Lo más vendido</a></li>
-        <li><a href="#">Ofertas</a></li>
-        <li><a href="#">Lo Nuevo</a></li>
-        <li><a href="#">Productos personalizados</a></li>
-        <li><a href="#">Contáctanos</a></li>
-        <li><a href="#">Sobre nosotros</a></li>
-        <li><a href="#"><img src="img/carrito.png" alt="Carrito" class="carrito-icon"></a></li>
-        <li>
-          <select id="selectorIdioma">
-            <option value="es">ES</option>
-            <option value="en">EN</option>
-          </select>
-        </li>
-      </ul>
+      <button onclick="irA('mas-vendido')">Lo más vendido</button>
+      <button onclick="irA('ofertas')">Ofertas</button>
+      <button onclick="irA('nuevo')">Lo Nuevo</button>
+      <button onclick="irA('personalizados')">Productos personalizados</button>
+      <button onclick="irA('contacto')">Contáctanos</button>
+      <button onclick="irA('nosotros')">Sobre nosotros</button>
+      <button onclick="irA('carrito')">🛒</button>
     </nav>
+    <select id="idioma" onchange="cambiarIdioma(this.value)">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+    </select>
   </header>
 
-  <div class="hero-titulo">
-    <h1>TechNova Store</h1>
+  <div class="titulo-container">
+    <h1 id="titulo">Tienda TecPro</h1>
   </div>
 
-  <main class="contenedor-productos">
-    <section class="productos-grid">
-      <!-- 12 productos -->
-      <div class="producto">
-        <img src="img/auriculares.jpg" alt="Auriculares 360">
-        <h3>Auriculares 360</h3>
-        <p>Audio envolvente con cancelación de ruido.</p>
-      </div>
-      <div class="producto">
-        <img src="img/smartwatch.jpg" alt="Smartwatch FitMax">
-        <h3>Smartwatch FitMax</h3>
-        <p>GPS, monitor de salud y sumergible.</p>
-      </div>
-      <div class="producto">
-        <img src="img/teclado.jpg" alt="Teclado RGB">
-        <h3>Teclado RGB</h3>
-        <p>Mecánico silencioso, retroiluminado.</p>
-      </div>
-      <div class="producto">
-        <img src="img/dron.jpg" alt="Dron SkyEye">
-        <h3>Dron SkyEye</h3>
-        <p>Grabación 4K, 2 km de alcance.</p>
-      </div>
-      <div class="producto">
-        <img src="img/laptop.jpg" alt="Laptop X-Light">
-        <h3>Laptop X-Light</h3>
-        <p>i7 12ª gen, ultradelgada y veloz.</p>
-      </div>
-      <div class="producto">
-        <img src="img/camara.jpg" alt="Cámara VlogPro">
-        <h3>Cámara VlogPro</h3>
-        <p>Perfecta para creadores de contenido.</p>
-      </div>
-      <div class="producto">
-        <img src="img/monitor.jpg" alt="Monitor UltraWide">
-        <h3>Monitor UltraWide</h3>
-        <p>Curvo, 34" QHD para multitarea.</p>
-      </div>
-      <div class="producto">
-        <img src="img/proyector.jpg" alt="Proyector CineCasa">
-        <h3>Proyector CineCasa</h3>
-        <p>Full HD, hasta 250" de imagen.</p>
-      </div>
-      <div class="producto">
-        <img src="img/tablet.jpg" alt="Tablet GraphX">
-        <h3>Tablet GraphX</h3>
-        <p>Diseño y productividad con stylus.</p>
-      </div>
-      <div class="producto">
-        <img src="img/cargador.jpg" alt="Cargador Solar">
-        <h3>Cargador Solar</h3>
-        <p>10000mAh, energía donde sea.</p>
-      </div>
-      <div class="producto">
-        <img src="img/cascos-vr.jpg" alt="Cascos VR Pro">
-        <h3>Cascos VR Pro</h3>
-        <p>Realidad virtual inmersiva 360°.</p>
-      </div>
-      <div class="producto">
-        <img src="img/speaker.jpg" alt="Bocina Bluetooth Max">
-        <h3>Bocina Bluetooth Max</h3>
-        <p>Potente y con batería de larga duración.</p>
-      </div>
-    </section>
-  </main>
+  <section class="productos" id="productos">
+    <!-- Productos tecnológicos -->
+  </section>
 
   <footer>
-    <div class="footer-contenido">
-      <p>&copy; 2025 TechNova Store</p>
-      <p>Contacto: contacto@technova.com | +52 123 456 7890</p>
-    </div>
+    <p id="contacto">Contacto: contacto@tecpro.com | WhatsApp: +52 123 456 7890</p>
+    <p>&copy; 2025 TecPro. Todos los derechos reservados.</p>
   </footer>
 
-  <script src="idioma.js"></script>
+  <script>
+    const productos = [
+      { nombre: "Smartwatch X1", descripcion: "Controla tu salud con estilo", imagen: "https://source.unsplash.com/featured/?smartwatch" },
+      { nombre: "Auriculares 360", descripcion: "Sonido envolvente para tu día", imagen: "https://source.unsplash.com/featured/?headphones" },
+      { nombre: "Drone Pro", descripcion: "Captura vistas aéreas impresionantes", imagen: "https://source.unsplash.com/featured/?drone" },
+      { nombre: "Tablet Z", descripcion: "Potente, ligera y rápida", imagen: "https://source.unsplash.com/featured/?tablet" },
+      { nombre: "Teclado LED", descripcion: "Retroiluminado y ergonómico", imagen: "https://source.unsplash.com/featured/?keyboard" },
+      { nombre: "Mouse ProX", descripcion: "Precisión profesional", imagen: "https://source.unsplash.com/featured/?mouse" },
+      { nombre: "Cámara UltraHD", descripcion: "Fotos nítidas en cualquier luz", imagen: "https://source.unsplash.com/featured/?camera" },
+      { nombre: "Altavoz Boom", descripcion: "Potencia en cada nota", imagen: "https://source.unsplash.com/featured/?speaker" },
+      { nombre: "Monitor Curve", descripcion: "Experiencia envolvente", imagen: "https://source.unsplash.com/featured/?monitor" },
+      { nombre: "Lámpara LED", descripcion: "Luz inteligente para tu espacio", imagen: "https://source.unsplash.com/featured/?lamp" },
+      { nombre: "Smart Ring", descripcion: "Tecnología al alcance de tu dedo", imagen: "https://source.unsplash.com/featured/?ring" },
+      { nombre: "PowerBank Turbo", descripcion: "Energía para todo el día", imagen: "https://source.unsplash.com/featured/?powerbank" }
+    ];
+
+    const contenedor = document.getElementById("productos");
+
+    function mostrarProductos() {
+      contenedor.innerHTML = "";
+      productos.forEach(p => {
+        contenedor.innerHTML += `
+          <div class="producto">
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <h2>${p.nombre}</h2>
+            <p>${p.descripcion}</p>
+          </div>`;
+      });
+    }
+
+    function irA(pagina) {
+      alert("Esta sección aún no está habilitada: " + pagina);
+    }
+
+    function cambiarIdioma(idioma) {
+      if (idioma === "en") {
+        document.getElementById("titulo").textContent = "TecPro Store";
+        document.getElementById("contacto").textContent = "Contact: contact@tecpro.com | WhatsApp: +52 123 456 7890";
+      } else {
+        document.getElementById("titulo").textContent = "Tienda TecPro";
+        document.getElementById("contacto").textContent = "Contacto: contacto@tecpro.com | WhatsApp: +52 123 456 7890";
+      }
+    }
+
+    mostrarProductos();
+  </script>
 </body>
 </html>
