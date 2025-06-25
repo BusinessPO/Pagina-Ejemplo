@@ -3,192 +3,239 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tienda TecPro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+  <title>Tienda Tech</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://www.transparenttextures.com/patterns/beige-paper.png');
-      background-color: #f0ebe3;
+      font-family: Arial, sans-serif;
+      background: url('textura.jpg'); /* textura elegante */
+      background-size: cover;
+      background-attachment: fixed;
+      background-color: #e6e4dd;
     }
 
     header {
-      background-color: #ffffffcc;
-      padding: 15px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(10px);
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    nav button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      color: #444;
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-
-    nav button:hover {
-      background-color: #d6ccc2;
-    }
-
-    #idioma {
-      padding: 6px;
-    }
-
-    .titulo-container {
-      background: url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?fit=crop&w=1200&q=80') no-repeat center;
+      background-image: url('encabezado.jpg'); /* imagen relacionada al negocio */
       background-size: cover;
-      padding: 60px 20px;
+      background-position: center;
       text-align: center;
+      padding: 80px 20px 100px;
+      position: relative;
     }
 
     h1 {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 3rem;
-      color: white;
+      font-family: 'Cooper Black', serif;
+      font-size: 3em;
+      color: gray;
       margin: 0;
-      text-shadow: 2px 2px 5px #000;
     }
 
-    .productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    nav {
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 0;
+      z-index: 10;
+    }
+
+    nav button, nav select {
+      background: transparent;
+      color: white;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px 10px;
       gap: 20px;
-      padding: 40px 20px;
     }
 
     .producto {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #ccc;
-      overflow: hidden;
-      transition: transform 0.3s;
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
       text-align: center;
-    }
-
-    .producto:hover {
-      transform: scale(1.03);
     }
 
     .producto img {
       width: 100%;
-      height: 160px;
+      height: 140px;
       object-fit: cover;
+      border-radius: 8px;
     }
 
-    .producto h2 {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1.2rem;
-      color: #444;
+    .producto h3 {
+      font-family: 'Georgia', serif;
       margin: 10px 0 5px;
     }
 
     .producto p {
-      font-size: 0.9rem;
-      color: #666;
-      margin: 0 10px 15px;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+
+    .producto button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
     }
 
     footer {
-      background-color: #d6ccc2;
-      text-align: center;
+      background: #ccc;
       padding: 20px;
-      font-size: 0.9rem;
+      text-align: center;
+      font-size: 0.9em;
       color: #333;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <nav>
-      <button onclick="irA('mas-vendido')">Lo más vendido</button>
-      <button onclick="irA('ofertas')">Ofertas</button>
-      <button onclick="irA('nuevo')">Lo Nuevo</button>
-      <button onclick="irA('personalizados')">Productos personalizados</button>
-      <button onclick="irA('contacto')">Contáctanos</button>
-      <button onclick="irA('nosotros')">Sobre nosotros</button>
-      <button onclick="irA('carrito')">🛒</button>
-    </nav>
+<header>
+  <nav>
+    <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
+    <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
+    <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
+    <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
+    <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
+    <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
+    <button onclick="ir('carrito.html')">
+      <img src="carrito.png" alt="Carrito" style="height: 20px; vertical-align: middle;"> 
+      <span id="btn-carrito">Carrito</span>
+    </button>
     <select id="idioma" onchange="cambiarIdioma(this.value)">
-      <option value="es">Español</option>
-      <option value="en">English</option>
+      <option value="es">ES</option>
+      <option value="en">EN</option>
     </select>
-  </header>
+  </nav>
+  <h1 id="titulo">Tienda Tech</h1>
+</header>
 
-  <div class="titulo-container">
-    <h1 id="titulo">Tienda TecPro</h1>
-  </div>
+<main id="productos"></main>
 
-  <section class="productos" id="productos">
-    <!-- Productos tecnológicos -->
-  </section>
+<footer id="footer">
+  Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>
+  Dirección: Calle Futura 123, Ciudad Tecno
+</footer>
 
-  <footer>
-    <p id="contacto">Contacto: contacto@tecpro.com | WhatsApp: +52 123 456 7890</p>
-    <p>&copy; 2025 TecPro. Todos los derechos reservados.</p>
-  </footer>
+<script>
+const productos = [
+  {
+    nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
+    desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
+    img: "smartwatch.jpg"
+  },
+  {
+    nombre: { es: "Audífonos 360", en: "360 Headphones" },
+    desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
+    img: "audifonos.jpg"
+  },
+  {
+    nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
+    desc: { es: "Proyector portátil con entrada HDMI y USB.", en: "Portable projector with HDMI and USB input." },
+    img: "proyector.jpg"
+  },
+  {
+    nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
+    desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
+    img: "lampara.jpg"
+  },
+  {
+    nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
+    desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
+    img: "bocina.jpg"
+  },
+  {
+    nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
+    desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
+    img: "mouse.jpg"
+  },
+  {
+    nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
+    desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
+    img: "teclado.jpg"
+  },
+  {
+    nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
+    desc: { es: "Pantalla extra portátil para laptop o móvil.", en: "Extra portable screen for laptop or mobile." },
+    img: "pantalla.jpg"
+  },
+  {
+    nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
+    desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
+    img: "purificador.jpg"
+  },
+  {
+    nombre: { es: "Cámara 360°", en: "360° Camera" },
+    desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
+    img: "camara.jpg"
+  },
+  {
+    nombre: { es: "Drone mini", en: "Mini Drone" },
+    desc: { es: "Vuelo autónomo y grabación HD.", en: "Autonomous flight and HD recording." },
+    img: "drone.jpg"
+  },
+  {
+    nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
+    desc: { es: "Ideal para aventuras, con doble salida USB.", en: "Perfect for adventures, dual USB." },
+    img: "cargador.jpg"
+  }
+];
 
-  <script>
-    const productos = [
-      { nombre: "Smartwatch X1", descripcion: "Controla tu salud con estilo", imagen: "https://source.unsplash.com/featured/?smartwatch" },
-      { nombre: "Auriculares 360", descripcion: "Sonido envolvente para tu día", imagen: "https://source.unsplash.com/featured/?headphones" },
-      { nombre: "Drone Pro", descripcion: "Captura vistas aéreas impresionantes", imagen: "https://source.unsplash.com/featured/?drone" },
-      { nombre: "Tablet Z", descripcion: "Potente, ligera y rápida", imagen: "https://source.unsplash.com/featured/?tablet" },
-      { nombre: "Teclado LED", descripcion: "Retroiluminado y ergonómico", imagen: "https://source.unsplash.com/featured/?keyboard" },
-      { nombre: "Mouse ProX", descripcion: "Precisión profesional", imagen: "https://source.unsplash.com/featured/?mouse" },
-      { nombre: "Cámara UltraHD", descripcion: "Fotos nítidas en cualquier luz", imagen: "https://source.unsplash.com/featured/?camera" },
-      { nombre: "Altavoz Boom", descripcion: "Potencia en cada nota", imagen: "https://source.unsplash.com/featured/?speaker" },
-      { nombre: "Monitor Curve", descripcion: "Experiencia envolvente", imagen: "https://source.unsplash.com/featured/?monitor" },
-      { nombre: "Lámpara LED", descripcion: "Luz inteligente para tu espacio", imagen: "https://source.unsplash.com/featured/?lamp" },
-      { nombre: "Smart Ring", descripcion: "Tecnología al alcance de tu dedo", imagen: "https://source.unsplash.com/featured/?ring" },
-      { nombre: "PowerBank Turbo", descripcion: "Energía para todo el día", imagen: "https://source.unsplash.com/featured/?powerbank" }
-    ];
+let idioma = localStorage.getItem('idioma') || 'es';
+document.getElementById('idioma').value = idioma;
 
-    const contenedor = document.getElementById("productos");
+function renderizarProductos() {
+  const contenedor = document.getElementById("productos");
+  contenedor.innerHTML = "";
+  productos.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "producto";
+    div.innerHTML = `
+      <img src="${p.img}" alt="${p.nombre[idioma]}">
+      <h3>${p.nombre[idioma]}</h3>
+      <p>${p.desc[idioma]}</p>
+      <button>${idioma === 'es' ? "Agregar al carrito" : "Add to cart"}</button>
+    `;
+    contenedor.appendChild(div);
+  });
 
-    function mostrarProductos() {
-      contenedor.innerHTML = "";
-      productos.forEach(p => {
-        contenedor.innerHTML += `
-          <div class="producto">
-            <img src="${p.imagen}" alt="${p.nombre}">
-            <h2>${p.nombre}</h2>
-            <p>${p.descripcion}</p>
-          </div>`;
-      });
-    }
+  document.getElementById("titulo").textContent = idioma === "es" ? "Tienda Tech" : "Tech Store";
+  document.getElementById("btn-masvendido").textContent = idioma === "es" ? "Lo más vendido" : "Top Sellers";
+  document.getElementById("btn-ofertas").textContent = idioma === "es" ? "Ofertas" : "Deals";
+  document.getElementById("btn-nuevo").textContent = idioma === "es" ? "Lo nuevo" : "New";
+  document.getElementById("btn-personalizados").textContent = idioma === "es" ? "Productos personalizados" : "Custom Products";
+  document.getElementById("btn-contacto").textContent = idioma === "es" ? "Contáctanos" : "Contact Us";
+  document.getElementById("btn-nosotros").textContent = idioma === "es" ? "Sobre nosotros" : "About Us";
+  document.getElementById("btn-carrito").textContent = idioma === "es" ? "Carrito" : "Cart";
+  document.getElementById("footer").innerHTML = idioma === "es"
+    ? "Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>Dirección: Calle Futura 123, Ciudad Tecno"
+    : "Contact: sales@tiendatech.com | Phone: +52 123 456 7890<br>Address: Future St. 123, Tech City";
+}
 
-    function irA(pagina) {
-      alert("Esta sección aún no está habilitada: " + pagina);
-    }
+function cambiarIdioma(lang) {
+  idioma = lang;
+  localStorage.setItem('idioma', idioma);
+  renderizarProductos();
+}
 
-    function cambiarIdioma(idioma) {
-      if (idioma === "en") {
-        document.getElementById("titulo").textContent = "TecPro Store";
-        document.getElementById("contacto").textContent = "Contact: contact@tecpro.com | WhatsApp: +52 123 456 7890";
-      } else {
-        document.getElementById("titulo").textContent = "Tienda TecPro";
-        document.getElementById("contacto").textContent = "Contacto: contacto@tecpro.com | WhatsApp: +52 123 456 7890";
-      }
-    }
+function ir(ruta) {
+  window.location.href = ruta;
+}
 
-    mostrarProductos();
-  </script>
+window.addEventListener("DOMContentLoaded", renderizarProductos);
+</script>
 </body>
 </html>
