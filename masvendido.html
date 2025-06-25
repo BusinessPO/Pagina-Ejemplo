@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lo más vendido</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('textura.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-color: #e6e4dd;
+    }
+
+    header {
+      background-image: url('masvendido.jpg'); /* Imagen temática */
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding: 80px 20px 100px;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Cooper Black', serif;
+      font-size: 3em;
+      color: gray;
+      margin: 0;
+    }
+
+    nav {
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 0;
+      z-index: 10;
+    }
+
+    nav button, nav select {
+      background: transparent;
+      color: white;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px 10px;
+      gap: 20px;
+    }
+
+    .producto {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .producto img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .producto h3 {
+      font-family: 'Georgia', serif;
+      margin: 10px 0 5px;
+    }
+
+    .producto p {
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+
+    .producto button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #ccc;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <button onclick="ir('index.html')" id="btn-inicio">Inicio</button>
+    <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
+    <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
+    <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
+    <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
+    <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
+    <button onclick="ir('carrito.html')">
+      <img src="carrito.png" alt="Carrito" style="height: 20px; vertical-align: middle;"> 
+      <span id="btn-carrito">Carrito</span>
+    </button>
+    <select id="idioma" onchange="cambiarIdioma(this.value)">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
+  <h1 id="titulo">Lo más vendido</h1>
+</header>
+
+<main id="productos"></main>
+
+<footer id="footer">
+  Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>
+  Dirección: Calle Futura 123, Ciudad Tecno
+</footer>
+
+<script>
+const productosMasVendidos = [
+  {
+    nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
+    desc: { es: "Reloj con carga solar y sensores de salud.", en: "Solar-powered watch with health sensors." },
+    img: "smartwatch.jpg"
+  },
+  {
+    nombre: { es: "Audífonos 360", en: "360 Headphones" },
+    desc: { es: "Sonido envolvente con cancelación activa.", en: "Surround sound with active noise canceling." },
+    img: "audifonos.jpg"
+  },
+  {
+    nombre: { es: "Purificador portátil", en: "Portable Purifier" },
+    desc: { es: "Limpieza de aire con HEPA y USB.", en: "HEPA air cleaning with USB power." },
+    img: "purificador.jpg"
+  },
+  {
+    nombre: { es: "Cámara 360°", en: "360° Camera" },
+    desc: { es: "Captura en 360° y streaming en vivo.", en: "360° capture with live streaming." },
+    img: "camara.jpg"
+  },
+  {
+    nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
+    desc: { es: "Carga doble vía USB para exteriores.", en: "Dual USB charging for outdoors." },
+    img: "cargador.jpg"
+  },
+  {
+    nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
+    desc: { es: "Lámpara LED con limpieza UV automática.", en: "LED lamp with UV sanitization." },
+    img: "lampara.jpg"
+  },
+  {
+    nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
+    desc: { es: "Proyector portátil compatible con HDMI y USB.", en: "Portable projector with HDMI/USB." },
+    img: "proyector.jpg"
+  }
+];
+
+let idioma = localStorage.getItem('idioma') || 'es';
+document.getElementById('idioma').value = idioma;
+
+function renderizarProductos() {
+  const contenedor = document.getElementById("productos");
+  contenedor.innerHTML = "";
+  productosMasVendidos.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "producto";
+    div.innerHTML = `
+      <img src="${p.img}" alt="${p.nombre[idioma]}">
+      <h3>${p.nombre[idioma]}</h3>
+      <p>${p.desc[idioma]}</p>
+      <button>${idioma === 'es' ? "Agregar al carrito" : "Add to cart"}</button>
+    `;
+    contenedor.appendChild(div);
+  });
+
+  document.getElementById("titulo").textContent = idioma === "es" ? "Lo más vendido" : "Top Sellers";
+  document.getElementById("btn-inicio").textContent = idioma === "es" ? "Inicio" : "Home";
+  document.getElementById("btn-ofertas").textContent = idioma === "es" ? "Ofertas" : "Deals";
+  document.getElementById("btn-nuevo").textContent = idioma === "es" ? "Lo nuevo" : "New";
+  document.getElementById("btn-personalizados").textContent = idioma === "es" ? "Productos personalizados" : "Custom Products";
+  document.getElementById("btn-contacto").textContent = idioma === "es" ? "Contáctanos" : "Contact Us";
+  document.getElementById("btn-nosotros").textContent = idioma === "es" ? "Sobre nosotros" : "About Us";
+  document.getElementById("btn-carrito").textContent = idioma === "es" ? "Carrito" : "Cart";
+  document.getElementById("footer").innerHTML = idioma === "es"
+    ? "Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>Dirección: Calle Futura 123, Ciudad Tecno"
+    : "Contact: sales@tiendatech.com | Phone: +52 123 456 7890<br>Address: Future St. 123, Tech City";
+}
+
+function cambiarIdioma(lang) {
+  idioma = lang;
+  localStorage.setItem('idioma', idioma);
+  renderizarProductos();
+}
+
+function ir(ruta) {
+  window.location.href = ruta;
+}
+
+window.addEventListener("DOMContentLoaded", renderizarProductos);
+</script>
+
+</body>
+</html>
