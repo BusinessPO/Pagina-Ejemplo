@@ -67,13 +67,34 @@
     }
 
     .producto {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      width: 200px
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
-    }
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* Contenedor que rodea la imagen */
+.imagen-producto {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-bottom: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+  height: 140px;       /* Altura fija para el cuadrito */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.imagen-producto img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;  /* Mostrar la imagen completa, sin recortar ni deformar */
+  border-radius: 6px;
+}
 
     .producto img {
       width: 100%;
