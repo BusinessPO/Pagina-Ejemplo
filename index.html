@@ -8,14 +8,14 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('textura.jpg'); /* textura elegante */
+      background: url('textura.jpg');
       background-size: cover;
       background-attachment: fixed;
       background-color: #e6e4dd;
     }
 
     header {
-      background-image: url('encabezado.jpg'); /* imagen relacionada al negocio */
+      background-image: url('encabezado.jpg');
       background-size: cover;
       background-position: center;
       text-align: center;
@@ -39,6 +39,7 @@
       background: rgba(0, 0, 0, 0.6);
       padding: 10px 0;
       z-index: 10;
+      flex-wrap: wrap;
     }
 
     nav button, nav select {
@@ -47,14 +48,17 @@
       border: none;
       font-size: 1em;
       cursor: pointer;
+      margin: 5px;
     }
 
     main {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
       padding: 30px 10px;
-      gap: 20px;
+      justify-items: center;
+      max-width: 1200px;
+      margin: auto;
     }
 
     .producto {
@@ -98,13 +102,24 @@
       text-align: center;
       font-size: 0.9em;
       color: #333;
+    }
 
-.productos-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
+    @media (max-width: 1024px) {
+      main {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
 
+    @media (max-width: 768px) {
+      main {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -119,7 +134,7 @@
     <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
     <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
     <button onclick="ir('carrito.html')">
-      <img src="carrito.png" alt="Carrito" style="height: 20px; vertical-align: middle;"> 
+      <img src="carrito.png" alt="Carrito" style="height: 20px; vertical-align: middle;">
       <span id="btn-carrito">Carrito</span>
     </button>
     <select id="idioma" onchange="cambiarIdioma(this.value)">
@@ -219,6 +234,7 @@ function renderizarProductos() {
     contenedor.appendChild(div);
   });
 
+  // Cambiar textos según idioma
   document.getElementById("titulo").textContent = idioma === "es" ? "Tienda Tech" : "Tech Store";
   document.getElementById("btn-masvendido").textContent = idioma === "es" ? "Lo más vendido" : "Top Sellers";
   document.getElementById("btn-ofertas").textContent = idioma === "es" ? "Ofertas" : "Deals";
