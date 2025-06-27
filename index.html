@@ -6,42 +6,27 @@
   <title>Tienda Tech</title>
   <style>
     body {
- body, html {
       margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
+      background: url('img/textura.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-color: #e6e4dd;
     }
-    body {
-      background: url('img/textura.jpg') fixed cover #e6e4dd;
-    }
-    header {
-      position: relative;
-      text-align: center;
-      padding-top: 60px;  /* espacio para el título */
-      padding-bottom: 20px;
-    }
-    header::before {
-      content: "";
-      background: url('img/encabezado.jpg') center/cover no-repeat;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 250px;
-      z-index: -1;
-    }
+
     nav {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
-      background: rgba(0,0,0,0.7);
-      padding: 12px 0;
       display: flex;
       justify-content: space-around;
-      z-index: 10;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
       flex-wrap: wrap;
     }
+
     nav button, nav select {
       background: transparent;
       color: white;
@@ -50,14 +35,17 @@
       cursor: pointer;
       margin: 5px;
     }
-    nav img {
-      vertical-align: middle;
-      height: 20px;
+
+    .encabezado-img {
+      margin-top: 50px; /* espacio para el menú fijo */
+      background-image: url('img/encabezado.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 220px;
+      width: 100%;
     }
+
     h1 {
-      position: relative;
-      z-index: 1;
-      margin: 0;
       font-family: 'Cooper Black', serif;
       font-size: 3em;
       color: white;
@@ -66,27 +54,30 @@
          1px -1px 0 #6a7a8a,
         -1px  1px 0 #6a7a8a,
          1px  1px 0 #6a7a8a;
+      text-align: center;
+      margin: 0;
+      padding: 20px 10px;
     }
+
     main {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 30px;
       padding: 30px 10px;
-      max-width: 1200px;
-      margin: 10px auto;
       justify-items: center;
+      max-width: 1200px;
+      margin: auto;
     }
+
     .producto {
       background: white;
       border-radius: 10px;
       padding: 15px;
-      width: 220px;
+      width: 200px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
+
     .imagen-producto {
       border: 1px solid #ccc;
       padding: 5px;
@@ -99,20 +90,24 @@
       align-items: center;
       overflow: hidden;
     }
+
     .imagen-producto img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
       border-radius: 6px;
     }
+
     .producto h3 {
-      font-family: Georgia, serif;
+      font-family: 'Georgia', serif;
       margin: 10px 0 5px;
     }
+
     .producto p {
       font-size: 0.9em;
       margin-bottom: 10px;
     }
+
     .producto button {
       background: #007bff;
       color: white;
@@ -121,13 +116,13 @@
       border-radius: 6px;
       cursor: pointer;
     }
+
     footer {
       background: #ccc;
       padding: 20px;
       text-align: center;
       font-size: 0.9em;
       color: #333;
-      margin-top: 20px;
     }
 
     @media (max-width: 1024px) {
@@ -151,7 +146,6 @@
 </head>
 <body>
 
-<header>
   <nav>
     <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
     <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
@@ -168,127 +162,125 @@
       <option value="en">EN</option>
     </select>
   </nav>
+
+  <div class="encabezado-img"></div>
   <h1 id="titulo">Tienda Tech</h1>
-</header>
 
-<main id="productos"></main>
+  <main id="productos"></main>
 
-<footer id="footer">
-  Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>
-  Dirección: Calle Futura 123, Ciudad Tecno
-</footer>
+  <footer id="footer">
+    Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>
+    Dirección: Calle Futura 123, Ciudad Tecno
+  </footer>
 
-<div id="contenedor-productos"></div>
+  <script>
+    const productos = [
+      {
+        nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
+        desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
+        img: "img/smartwatchsolar.jpg"
+      },
+      {
+        nombre: { es: "Audífonos 360", en: "360 Headphones" },
+        desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
+        img: "img/audifonos.jpg"
+      },
+      {
+        nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
+        desc: { es: "Proyector portátil con entrada HDMI y USB.", en: "Portable projector with HDMI and USB input." },
+        img: "img/proyector.jpg"
+      },
+      {
+        nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
+        desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
+        img: "img/lampara.jpg"
+      },
+      {
+        nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
+        desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
+        img: "img/bocina.jpg"
+      },
+      {
+        nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
+        desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
+        img: "img/mouse.jpg"
+      },
+      {
+        nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
+        desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
+        img: "img/teclado.jpg"
+      },
+      {
+        nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
+        desc: { es: "Pantalla extra portátil para laptop o móvil.", en: "Extra portable screen for laptop or mobile." },
+        img: "img/pantalla.jpg"
+      },
+      {
+        nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
+        desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
+        img: "img/purificador.jpg"
+      },
+      {
+        nombre: { es: "Cámara 360°", en: "360° Camera" },
+        desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
+        img: "img/camara.jpg"
+      },
+      {
+        nombre: { es: "Drone mini", en: "Mini Drone" },
+        desc: { es: "Vuelo autónomo y grabación HD.", en: "Autonomous flight and HD recording." },
+        img: "img/drone.jpg"
+      },
+      {
+        nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
+        desc: { es: "Ideal para aventuras, con doble salida USB.", en: "Perfect for adventures, dual USB." },
+        img: "img/cargador.jpg"
+      }
+    ];
 
-<script>
-const productos = [
-  {
-    nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
-    desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
-    img: "img/smartwatchsolar.jpg"
-  },
-  {
-    nombre: { es: "Audífonos 360", en: "360 Headphones" },
-    desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
-    img: "img/audifonos.jpg"
-  },
-  {
-    nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
-    desc: { es: "Proyector portátil con entrada HDMI y USB.", en: "Portable projector with HDMI and USB input." },
-    img: "img/proyector.jpg"
-  },
-  {
-    nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
-    desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
-    img: "img/lampara.jpg"
-  },
-  {
-    nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
-    desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
-    img: "img/bocina.jpg"
-  },
-  {
-    nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
-    desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
-    img: "img/mouse.jpg"
-  },
-  {
-    nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
-    desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
-    img: "img/teclado.jpg"
-  },
-  {
-    nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
-    desc: { es: "Pantalla extra portátil para laptop o móvil.", en: "Extra portable screen for laptop or mobile." },
-    img: "img/pantalla.jpg"
-  },
-  {
-    nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
-    desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
-    img: "img/purificador.jpg"
-  },
-  {
-    nombre: { es: "Cámara 360°", en: "360° Camera" },
-    desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
-    img: "img/camara.jpg"
-  },
-  {
-    nombre: { es: "Drone mini", en: "Mini Drone" },
-    desc: { es: "Vuelo autónomo y grabación HD.", en: "Autonomous flight and HD recording." },
-    img: "img/drone.jpg"
-  },
-  {
-    nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
-    desc: { es: "Ideal para aventuras, con doble salida USB.", en: "Perfect for adventures, dual USB." },
-    img: "img/cargador.jpg"
-  }
-];
+    let idioma = localStorage.getItem('idioma') || 'es';
+    document.getElementById('idioma').value = idioma;
 
-let idioma = localStorage.getItem('idioma') || 'es';
-document.getElementById('idioma').value = idioma;
+    function renderizarProductos() {
+      const contenedor = document.getElementById("productos");
+      contenedor.innerHTML = "";
+      productos.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "producto";
+        div.innerHTML = `
+          <div class="imagen-producto">
+            <img src="${p.img}" alt="${p.nombre[idioma]}">
+          </div>
+          <h3>${p.nombre[idioma]}</h3>
+          <p>${p.desc[idioma]}</p>
+          <button>${idioma === 'es' ? "Agregar al carrito" : "Add to cart"}</button>
+        `;
+        contenedor.appendChild(div);
+      });
 
-function renderizarProductos() {
-  const contenedor = document.getElementById("productos");
-  contenedor.innerHTML = "";
-  productos.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "producto";
-    div.innerHTML = `
-      <div class="imagen-producto">
-        <img src="${p.img}" alt="${p.nombre[idioma]}">
-      </div>
-      <h3>${p.nombre[idioma]}</h3>
-      <p>${p.desc[idioma]}</p>
-      <button>${idioma === 'es' ? "Agregar al carrito" : "Add to cart"}</button>
-    `;
-    contenedor.appendChild(div);
-  });
+      document.getElementById("titulo").textContent = idioma === "es" ? "Tienda Tech" : "Tech Store";
+      document.getElementById("btn-masvendido").textContent = idioma === "es" ? "Lo más vendido" : "Top Sellers";
+      document.getElementById("btn-ofertas").textContent = idioma === "es" ? "Ofertas" : "Deals";
+      document.getElementById("btn-nuevo").textContent = idioma === "es" ? "Lo nuevo" : "New";
+      document.getElementById("btn-personalizados").textContent = idioma === "es" ? "Productos personalizados" : "Custom Products";
+      document.getElementById("btn-contacto").textContent = idioma === "es" ? "Contáctanos" : "Contact Us";
+      document.getElementById("btn-nosotros").textContent = idioma === "es" ? "Sobre nosotros" : "About Us";
+      document.getElementById("btn-carrito").textContent = idioma === "es" ? "Carrito" : "Cart";
+      document.getElementById("footer").innerHTML = idioma === "es"
+        ? "Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>Dirección: Calle Futura 123, Ciudad Tecno"
+        : "Contact: sales@tiendatech.com | Phone: +52 123 456 7890<br>Address: Future St. 123, Tech City";
+    }
 
-  // Cambiar textos según idioma (tu código existente)
-  document.getElementById("titulo").textContent = idioma === "es" ? "Tienda Tech" : "Tech Store";
-  document.getElementById("btn-masvendido").textContent = idioma === "es" ? "Lo más vendido" : "Top Sellers";
-  document.getElementById("btn-ofertas").textContent = idioma === "es" ? "Ofertas" : "Deals";
-  document.getElementById("btn-nuevo").textContent = idioma === "es" ? "Lo nuevo" : "New";
-  document.getElementById("btn-personalizados").textContent = idioma === "es" ? "Productos personalizados" : "Custom Products";
-  document.getElementById("btn-contacto").textContent = idioma === "es" ? "Contáctanos" : "Contact Us";
-  document.getElementById("btn-nosotros").textContent = idioma === "es" ? "Sobre nosotros" : "About Us";
-  document.getElementById("btn-carrito").textContent = idioma === "es" ? "Carrito" : "Cart";
-  document.getElementById("footer").innerHTML = idioma === "es"
-    ? "Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>Dirección: Calle Futura 123, Ciudad Tecno"
-    : "Contact: sales@tiendatech.com | Phone: +52 123 456 7890<br>Address: Future St. 123, Tech City";
-}
+    function cambiarIdioma(lang) {
+      idioma = lang;
+      localStorage.setItem('idioma', idioma);
+      renderizarProductos();
+    }
 
-function cambiarIdioma(lang) {
-  idioma = lang;
-  localStorage.setItem('idioma', idioma);
-  renderizarProductos();
-}
+    function ir(ruta) {
+      window.location.href = ruta;
+    }
 
-function ir(ruta) {
-  window.location.href = ruta;
-}
-
-window.addEventListener("DOMContentLoaded", renderizarProductos);
-</script>
+    window.addEventListener("DOMContentLoaded", renderizarProductos);
+  </script>
 </body>
 </html>
