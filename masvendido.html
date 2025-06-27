@@ -6,9 +6,7 @@
   <title>Lo más vendido</title>
   <style>
     body {
-     margin: 0;
-     padding: 0;
-     display: flex;
+      margin: 0;
       font-family: Arial, sans-serif;
       background: url('img/textura.jpg');
       background-size: cover;
@@ -19,44 +17,31 @@
     header {
       position: relative;
       height: 220px;
-      margin: 0;
-      padding-top: 0;
+      text-align: center;
     }
 
     header::before {
       content: "";
-      background-image: url('img/encabezado.jpg'); /* Imagen detrás del título */
+      background-image: url('img/encabezado.jpg');
       background-size: cover;
       background-position: center;
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 220px;
+      bottom: 0;
       z-index: -1;
     }
-
-     h1 {
-  font-family: 'Cooper Black', serif;
-  font-size: 3em;
-  color: white; /* texto blanco */
-  text-shadow: 
-    -1px -1px 0 #6a7a8a,  
-    1px -1px 0 #6a7a8a,
-    -1px 1px 0 #6a7a8a,
-    1px 1px 0 #6a7a8a; /* contorno azul-gris */
-  margin-top: 70px;
-}
 
     nav {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      display: flex;
-      justify-content: space-around;
       background: rgba(0, 0, 0, 0.6);
       padding: 10px 0;
+      display: flex;
+      justify-content: space-around;
       z-index: 10;
       flex-wrap: wrap;
     }
@@ -70,6 +55,18 @@
       margin: 5px;
     }
 
+    h1 {
+      margin-top: 80px;
+      font-family: 'Cooper Black', serif;
+      font-size: 3em;
+      color: white;
+      text-shadow:
+        -1px -1px 0 #6a7a8a,
+         1px -1px 0 #6a7a8a,
+        -1px 1px 0 #6a7a8a,
+         1px 1px 0 #6a7a8a;
+    }
+
     main {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -80,36 +77,34 @@
       margin: auto;
     }
 
- .producto {
-  background: white;
-  border-radius: 10px;
-  padding: 15px;
-  width: 200px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  text-align: center;
-}
+    .producto {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
 
-/* Contenedor que rodea la imagen */
-.imagen-producto {
-  border: 1px solid #ccc;
-  padding: 5px;
-  margin-bottom: 12px;
-  background: #fafafa;
-  border-radius: 8px;
-  height: 140px;       /* Altura fija para el cuadrito */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
+    .imagen-producto {
+      border: 1px solid #ccc;
+      padding: 5px;
+      margin-bottom: 12px;
+      background: #fafafa;
+      border-radius: 8px;
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
 
-/* Imagen dentro del contenedor */
-.imagen-producto img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;  /* Mostrar la imagen completa, sin recortar ni deformar */
-  border-radius: 6px;
-}
+    .imagen-producto img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+    }
 
     .producto h3 {
       font-family: 'Georgia', serif;
@@ -164,7 +159,7 @@
     <button onclick="ir('index.html')" id="btn-inicio">Inicio</button>
     <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
     <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
-    <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
+    <button onclick="ir('personalizados.html')" id="btn-personalizados">Personalizados</button>
     <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
     <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
     <button onclick="ir('carrito.html')">
@@ -176,7 +171,7 @@
       <option value="en">EN</option>
     </select>
   </nav>
-  <h1 id="titulo" style="margin-top: 70px;">Lo más vendido</h1>
+  <h1 id="titulo">Lo más vendido</h1>
 </header>
 
 <main id="productos"></main>
@@ -191,7 +186,7 @@ const productosMasVendidos = [
   {
     nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
     desc: { es: "Reloj con carga solar y sensores de salud.", en: "Solar-powered watch with health sensors." },
-    img: "img/smartwatchsolar.jpg"
+    img: "img/smartwatch.jpg"
   },
   {
     nombre: { es: "Audífonos 360", en: "360 Headphones" },
@@ -222,8 +217,7 @@ const productosMasVendidos = [
     nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
     desc: { es: "Proyector portátil compatible con HDMI y USB.", en: "Portable projector with HDMI/USB." },
     img: "img/proyector.jpg"
-  },
-
+  }
 ];
 
 let idioma = localStorage.getItem('idioma') || 'es';
@@ -236,12 +230,12 @@ function renderizarProductos() {
     const div = document.createElement("div");
     div.className = "producto";
     div.innerHTML = `
-  <div class="imagen-producto">
-    <img src="${p.img}" alt="${p.nombre[idioma]}">
-  </div>
-  <h3>${p.nombre[idioma]}</h3>
-  <p>${p.desc[idioma]}</p>
-  <button>${idioma === 'es' ? "Agregar al carrito" : "Add to cart"}</button>
+      <div class="imagen-producto">
+        <img src="${p.img}" alt="${p.nombre[idioma]}">
+      </div>
+      <h3>${p.nombre[idioma]}</h3>
+      <p>${p.desc[idioma]}</p>
+      <button>${idioma === 'es' ? "Agregar al carrito" : "Add to cart"}</button>
     `;
     contenedor.appendChild(div);
   });
@@ -250,7 +244,7 @@ function renderizarProductos() {
   document.getElementById("btn-inicio").textContent = idioma === "es" ? "Inicio" : "Home";
   document.getElementById("btn-ofertas").textContent = idioma === "es" ? "Ofertas" : "Deals";
   document.getElementById("btn-nuevo").textContent = idioma === "es" ? "Lo nuevo" : "New";
-  document.getElementById("btn-personalizados").textContent = idioma === "es" ? "Productos personalizados" : "Custom Products";
+  document.getElementById("btn-personalizados").textContent = idioma === "es" ? "Personalizados" : "Custom";
   document.getElementById("btn-contacto").textContent = idioma === "es" ? "Contáctanos" : "Contact Us";
   document.getElementById("btn-nosotros").textContent = idioma === "es" ? "Sobre nosotros" : "About Us";
   document.getElementById("btn-carrito").textContent = idioma === "es" ? "Carrito" : "Cart";
