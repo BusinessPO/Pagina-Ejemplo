@@ -6,9 +6,12 @@
   <title>Lo más vendido</title>
   <style>
     body {
-      margin: 0;
+     margin: 0;
       font-family: Arial, sans-serif;
-      background: #e6e4dd;
+      background: url('img/textura.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-color: #e6e4dd;
     }
 
     header {
@@ -18,7 +21,7 @@
 
     header::before {
       content: "";
-      background-image: url('masvendido.jpg'); /* Imagen detrás del título */
+      background-image: url('img/encabezado.jpg'); /* Imagen detrás del título */
       background-size: cover;
       background-position: center;
       position: absolute;
@@ -29,23 +32,28 @@
       z-index: -1;
     }
 
-    h1 {
-      font-family: 'Cooper Black', serif;
-      font-size: 3em;
-      color: gray;
-      margin: 0;
-      padding: 100px 20px 30px;
-    }
+     h1 {
+  font-family: 'Cooper Black', serif;
+  font-size: 3em;
+  color: white; /* texto blanco */
+  text-shadow: 
+    -1px -1px 0 #6a7a8a,  
+    1px -1px 0 #6a7a8a,
+    -1px 1px 0 #6a7a8a,
+    1px 1px 0 #6a7a8a; /* contorno azul-gris */
+  margin: 0;
+}
 
     nav {
-      background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 10px;
+      width: 100%;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-around;
+      background: rgba(0, 0, 0, 0.6);
       padding: 10px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      z-index: 10;
+      flex-wrap: wrap;
     }
 
     nav button, nav select {
@@ -59,27 +67,44 @@
 
     main {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      padding: 30px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      padding: 30px 10px;
+      justify-items: center;
       max-width: 1200px;
       margin: auto;
     }
 
-    .producto {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.15);
-      text-align: center;
-    }
+ .producto {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
 
-    .producto img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
+/* Contenedor que rodea la imagen */
+.imagen-producto {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-bottom: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+  height: 140px;       /* Altura fija para el cuadrito */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Imagen dentro del contenedor */
+.imagen-producto img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;  /* Mostrar la imagen completa, sin recortar ni deformar */
+  border-radius: 6px;
+}
 
     .producto h3 {
       font-family: 'Georgia', serif;
@@ -106,7 +131,24 @@
       text-align: center;
       font-size: 0.9em;
       color: #333;
-      margin-top: 40px;
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      main {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -121,7 +163,7 @@
     <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
     <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
     <button onclick="ir('carrito.html')">
-      <img src="carrito.png" alt="Carrito" style="height: 20px; vertical-align: middle;"> 
+      <img src="img/carrito.png" alt="Carrito" style="height: 20px; vertical-align: middle;"> 
       <span id="btn-carrito">Carrito</span>
     </button>
     <select id="idioma" onchange="cambiarIdioma(this.value)">
@@ -144,27 +186,27 @@ const productosMasVendidos = [
   {
     nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
     desc: { es: "Reloj con carga solar y sensores de salud.", en: "Solar-powered watch with health sensors." },
-    img: "smartwatch.jpg"
+    img: "img/smartwatch.jpg"
   },
   {
     nombre: { es: "Audífonos 360", en: "360 Headphones" },
     desc: { es: "Sonido envolvente con cancelación activa.", en: "Surround sound with active noise canceling." },
-    img: "audifonos.jpg"
+    img: "img/audifonos.jpg"
   },
   {
     nombre: { es: "Purificador portátil", en: "Portable Purifier" },
     desc: { es: "Limpieza de aire con HEPA y USB.", en: "HEPA air cleaning with USB power." },
-    img: "purificador.jpg"
+    img: "img/purificador.jpg"
   },
   {
     nombre: { es: "Cámara 360°", en: "360° Camera" },
     desc: { es: "Captura en 360° y streaming en vivo.", en: "360° capture with live streaming." },
-    img: "camara.jpg"
+    img: "img/camara.jpg"
   },
   {
     nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
     desc: { es: "Carga doble vía USB para exteriores.", en: "Dual USB charging for outdoors." },
-    img: "cargador.jpg"
+    img: "img/cargador.jpg"
   },
   {
     nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
@@ -176,11 +218,7 @@ const productosMasVendidos = [
     desc: { es: "Proyector portátil compatible con HDMI y USB.", en: "Portable projector with HDMI/USB." },
     img: "proyector.jpg"
   },
-  {
-    nombre: { es: "Teclado ergonómico", en: "Ergonomic Keyboard" },
-    desc: { es: "Comodidad y productividad para oficina.", en: "Comfort and productivity for office work." },
-    img: "teclado.jpg"
-  }
+
 ];
 
 let idioma = localStorage.getItem('idioma') || 'es';
