@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tienda Tech</title>
   <style>
     body {
@@ -15,58 +15,93 @@
     }
 
     nav {
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 10px 0;
       position: fixed;
       top: 0;
       left: 0;
+      width: 100%;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px 0;
       z-index: 1000;
-      flex-wrap: wrap;
+      font-weight: 600;
+      height: 50px;
     }
 
-    nav button, nav select {
-      background: transparent;
-      color: white;
+    nav button {
+      background: none;
       border: none;
-      font-size: 1em;
+      color: white;
+      font-size: 1.1em;
       cursor: pointer;
-      margin: 5px;
+      padding: 8px 12px;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s ease;
+      font-family: Arial, sans-serif;
+    }
+
+    nav button#btn-masvendido {
+      border-bottom: 3px solid #0f6eff;
+      color: #0f6eff;
+      font-weight: 700;
+    }
+
+    nav button:hover:not(#btn-masvendido) {
+      color: #0f6eff;
+    }
+
+    nav select {
+      background: transparent;
+      border: 1px solid white;
+      border-radius: 5px;
+      color: white;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-weight: 600;
     }
 
     .encabezado-img {
-      margin-top: 50px; /* espacio para el menú fijo */
+      margin: 0;
       background-image: url('img/encabezado.jpg');
       background-size: cover;
       background-position: center;
       height: 220px;
-      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-sizing: border-box;
+      z-index: 0;
     }
 
-    h1 {
-      font-family: 'Cooper Black', serif;
-      font-size: 3em;
+    h1#titulo {
       color: white;
+      font-family: 'Cooper Black', serif;
+      font-size: 3.4rem;
       text-shadow:
         -1px -1px 0 #6a7a8a,
          1px -1px 0 #6a7a8a,
         -1px  1px 0 #6a7a8a,
          1px  1px 0 #6a7a8a;
-      text-align: center;
       margin: 0;
-      padding: 20px 10px;
+      padding: 0 20px;
+      text-align: center;
+      user-select: none;
+      z-index: 1;
+      position: relative;
     }
 
     main {
+      padding-top: 280px; /* espacio para nav (50px) + encabezado (220px) + margen */
+      max-width: 1200px;
+      margin: 0 auto 50px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 30px;
-      padding: 30px 10px;
+      padding-left: 15px;
+      padding-right: 15px;
       justify-items: center;
-      max-width: 1200px;
-      margin: auto;
     }
 
     .producto {
@@ -115,6 +150,11 @@
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .producto button:hover {
+      background-color: #0056b3;
     }
 
     footer {
@@ -123,6 +163,7 @@
       text-align: center;
       font-size: 0.9em;
       color: #333;
+      margin-top: 40px;
     }
 
     @media (max-width: 1024px) {
@@ -140,6 +181,12 @@
     @media (max-width: 480px) {
       main {
         grid-template-columns: 1fr;
+      }
+      nav {
+        gap: 15px;
+      }
+      nav button {
+        font-size: 1em;
       }
     }
   </style>
@@ -163,8 +210,9 @@
     </select>
   </nav>
 
-  <div class="encabezado-img"></div>
-  <h1 id="titulo">Tienda Tech</h1>
+  <div class="encabezado-img">
+    <h1 id="titulo">Tienda Tech</h1>
+  </div>
 
   <main id="productos"></main>
 
