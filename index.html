@@ -19,7 +19,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Fondo negro semi-transparente */
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -94,11 +94,11 @@
 
   main {
     padding-top: 280px; /* 50px menú + 220px encabezado + 10px margen */
-    max-width: 1200px;
+    max-width: 1170px; /* ajuste para que coincida con el ancho original */
     margin: 0 auto 50px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 20px 30px; /* 20px filas, 30px columnas para coincidir */
     padding-left: 15px;
     padding-right: 15px;
     justify-items: center;
@@ -108,9 +108,14 @@
     background: white;
     border-radius: 10px;
     padding: 15px;
-    width: 200px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    width: 250px; /* ancho igual al original */
+    box-shadow: 0 0 10px rgba(0,0,0,0.15); /* sombra más sutil */
     text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .producto:hover {
+    transform: translateY(-5px);
   }
 
   .imagen-producto {
@@ -136,11 +141,13 @@
   .producto h3 {
     font-family: 'Georgia', serif;
     margin: 10px 0 5px;
+    font-size: 1.1em;
   }
 
   .producto p {
     font-size: 0.9em;
     margin-bottom: 10px;
+    color: #333;
   }
 
   .producto button {
@@ -150,6 +157,7 @@
     padding: 8px 12px;
     border-radius: 6px;
     cursor: pointer;
+    font-weight: 600;
     transition: background-color 0.3s ease;
   }
 
@@ -169,18 +177,32 @@
   @media (max-width: 1024px) {
     main {
       grid-template-columns: repeat(3, 1fr);
+      max-width: 900px;
+    }
+    .producto {
+      width: 250px;
     }
   }
 
   @media (max-width: 768px) {
     main {
       grid-template-columns: repeat(2, 1fr);
+      max-width: 600px;
+    }
+    .producto {
+      width: 250px;
     }
   }
 
   @media (max-width: 480px) {
     main {
       grid-template-columns: 1fr;
+      max-width: 320px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    .producto {
+      width: 100%;
     }
     nav {
       gap: 15px;
@@ -224,14 +246,19 @@
 <script>
   const productos = [
     {
+      nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
+      desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
+      img: "img/bocina.jpg"
+    },
+    {
+      nombre: { es: "Cámara 360°", en: "360° Camera" },
+      desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
+      img: "img/camara.jpg"
+    },
+    {
       nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
       desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
       img: "img/smartwatchsolar.jpg"
-    },
-    {
-      nombre: { es: "Audífonos 360", en: "360 Headphones" },
-      desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
-      img: "img/audifonos.jpg"
     },
     {
       nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
@@ -239,24 +266,19 @@
       img: "img/proyector.jpg"
     },
     {
-      nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
-      desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
-      img: "img/lampara.jpg"
-    },
-    {
-      nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
-      desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
-      img: "img/bocina.jpg"
-    },
-    {
-      nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
-      desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
-      img: "img/mouse.jpg"
+      nombre: { es: "Audífonos 360", en: "360 Headphones" },
+      desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
+      img: "img/audifonos.jpg"
     },
     {
       nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
       desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
       img: "img/teclado.jpg"
+    },
+    {
+      nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
+      desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
+      img: "img/mouse.jpg"
     },
     {
       nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
@@ -269,14 +291,14 @@
       img: "img/purificador.jpg"
     },
     {
-      nombre: { es: "Cámara 360°", en: "360° Camera" },
-      desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
-      img: "img/camara.jpg"
-    },
-    {
       nombre: { es: "Drone mini", en: "Mini Drone" },
       desc: { es: "Vuelo autónomo y grabación HD.", en: "Autonomous flight and HD recording." },
       img: "img/drone.jpg"
+    },
+    {
+      nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
+      desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
+      img: "img/lampara.jpg"
     },
     {
       nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
