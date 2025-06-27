@@ -162,31 +162,32 @@
 <script>
   const productosMasVendidos = [
     /* tus productos aquí */
-   {
-    nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
-    desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
-    img: "img/smartwatchsolar.jpg"
-  },
   {
-    nombre: { es: "Audífonos 360", en: "360 Headphones" },
-    desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
-    img: "img/audifonos.jpg"
-  }
-   {
     nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
     desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
     img: "img/bocina.jpg"
   },
   {
-    nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
-    desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
-    img: "img/mouse.jpg"
+    nombre: { es: "Cámara 360°", en: "360° Camera" },
+    desc: { es: "Captura en 360° y streaming en vivo.", en: "360° capture with live streaming." },
+    img: "img/camara.jpg"
   },
   {
-    nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
-    desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
-    img: "img/teclado.jpg"
+    nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
+    desc: { es: "Reloj con carga solar y sensores de salud.", en: "Solar-powered watch with health sensors." },
+    img: "img/smartwatchsolar.jpg"
+  },
+  {
+    nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
+    desc: { es: "Proyector portátil compatible con HDMI y USB.", en: "Portable projector with HDMI/USB." },
+    img: "img/proyector.jpg"
+  },
+  {
+    nombre: { es: "Audífonos 360", en: "360 Headphones" },
+    desc: { es: "Sonido envolvente con cancelación activa.", en: "Surround sound with active noise canceling." },
+    img: "img/audifonos.jpg"
   }
+
   ];
   let idioma = localStorage.getItem('idioma') || 'es';
   document.getElementById('idioma').value = idioma;
