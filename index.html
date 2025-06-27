@@ -1,334 +1,335 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tienda Tech</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('img/textura.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      background-color: #e6e4dd;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tienda Tech</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('img/textura.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #e6e4dd;
+  }
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      padding: 15px 0;
-      z-index: 1000;
-      font-weight: 600;
-      height: 50px;
-    }
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo negro semi-transparente */
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px 0;
+    z-index: 1000;
+    font-weight: 600;
+    height: 50px;
+  }
 
-    nav button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.1em;
-      cursor: pointer;
-      padding: 8px 12px;
-      border-bottom: 3px solid transparent;
-      transition: border-color 0.3s ease;
-      font-family: Arial, sans-serif;
-    }
+  nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s ease;
+    font-family: Arial, sans-serif;
+  }
 
-    nav button#btn-masvendido {
-      border-bottom: 3px solid #0f6eff;
-      color: #0f6eff;
-      font-weight: 700;
-    }
+  nav button#btn-masvendido {
+    border-bottom: 3px solid #0f6eff;
+    color: #0f6eff;
+    font-weight: 700;
+  }
 
-    nav button:hover:not(#btn-masvendido) {
-      color: #0f6eff;
-    }
+  nav button:hover:not(#btn-masvendido) {
+    color: #0f6eff;
+  }
 
-    nav select {
-      background: transparent;
-      border: 1px solid white;
-      border-radius: 5px;
-      color: white;
-      padding: 6px 10px;
-      cursor: pointer;
-      font-weight: 600;
-    }
+  nav select {
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-weight: 600;
+  }
 
-    .encabezado-img {
-      margin: 0;
-      background-image: url('img/encabezado.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      box-sizing: border-box;
-      z-index: 0;
-    }
+  .encabezado-img {
+    margin: 0;
+    background-image: url('img/encabezado.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    z-index: 0;
+  }
 
-    h1#titulo {
-      color: white;
-      font-family: 'Cooper Black', serif;
-      font-size: 3.4rem;
-      text-shadow:
-        -1px -1px 0 #6a7a8a,
-         1px -1px 0 #6a7a8a,
-        -1px  1px 0 #6a7a8a,
-         1px  1px 0 #6a7a8a;
-      margin: 0;
-      padding: 0 20px;
-      text-align: center;
-      user-select: none;
-      z-index: 1;
-      position: relative;
-    }
+  h1#titulo {
+    color: white;
+    font-family: 'Cooper Black', serif;
+    font-size: 3.4rem;
+    text-shadow:
+      -1px -1px 0 #6a7a8a,
+       1px -1px 0 #6a7a8a,
+      -1px  1px 0 #6a7a8a,
+       1px  1px 0 #6a7a8a;
+    margin: 0;
+    padding: 0 20px;
+    text-align: center;
+    user-select: none;
+    z-index: 1;
+    position: relative;
+  }
 
+  main {
+    padding-top: 280px; /* 50px menú + 220px encabezado + 10px margen */
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    justify-items: center;
+  }
+
+  .producto {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  .imagen-producto {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 12px;
+    background: #fafafa;
+    border-radius: 8px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .imagen-producto img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  .producto h3 {
+    font-family: 'Georgia', serif;
+    margin: 10px 0 5px;
+  }
+
+  .producto p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+
+  .producto button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .producto button:hover {
+    background-color: #0056b3;
+  }
+
+  footer {
+    background: #ccc;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #333;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 1024px) {
     main {
-      padding-top: 280px; /* espacio para nav (50px) + encabezado (220px) + margen */
-      max-width: 1200px;
-      margin: 0 auto 50px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
-      padding-left: 15px;
-      padding-right: 15px;
-      justify-items: center;
+      grid-template-columns: repeat(3, 1fr);
     }
+  }
 
-    .producto {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      width: 200px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
+  @media (max-width: 768px) {
+    main {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 
-    .imagen-producto {
-      border: 1px solid #ccc;
-      padding: 5px;
-      margin-bottom: 12px;
-      background: #fafafa;
-      border-radius: 8px;
-      height: 140px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+  @media (max-width: 480px) {
+    main {
+      grid-template-columns: 1fr;
     }
-
-    .imagen-producto img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 6px;
+    nav {
+      gap: 15px;
     }
-
-    .producto h3 {
-      font-family: 'Georgia', serif;
-      margin: 10px 0 5px;
+    nav button {
+      font-size: 1em;
     }
-
-    .producto p {
-      font-size: 0.9em;
-      margin-bottom: 10px;
-    }
-
-    .producto button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .producto button:hover {
-      background-color: #0056b3;
-    }
-
-    footer {
-      background: #ccc;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #333;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 1024px) {
-      main {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      main {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-      nav {
-        gap: 15px;
-      }
-      nav button {
-        font-size: 1em;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
-    <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
-    <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
-    <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
-    <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
-    <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
-    <button onclick="ir('carrito.html')">
-      <img src="img/carrito.png" alt="Carrito" style="height: 20px; vertical-align: middle;">
-      <span id="btn-carrito">Carrito</span>
-    </button>
-    <select id="idioma" onchange="cambiarIdioma(this.value)">
-      <option value="es">ES</option>
-      <option value="en">EN</option>
-    </select>
-  </nav>
+<nav>
+  <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
+  <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
+  <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
+  <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
+  <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
+  <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
+  <button onclick="ir('carrito.html')">
+    <img src="img/carrito.png" alt="Carrito" style="height: 20px; vertical-align: middle;">
+    <span id="btn-carrito">Carrito</span>
+  </button>
+  <select id="idioma" onchange="cambiarIdioma(this.value)">
+    <option value="es">ES</option>
+    <option value="en">EN</option>
+  </select>
+</nav>
 
-  <div class="encabezado-img">
-    <h1 id="titulo">Tienda Tech</h1>
-  </div>
+<div class="encabezado-img">
+  <h1 id="titulo">Tienda Tech</h1>
+</div>
 
-  <main id="productos"></main>
+<main id="productos"></main>
 
-  <footer id="footer">
-    Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>
-    Dirección: Calle Futura 123, Ciudad Tecno
-  </footer>
+<footer id="footer">
+  Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>
+  Dirección: Calle Futura 123, Ciudad Tecno
+</footer>
 
-  <script>
-    const productos = [
-      {
-        nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
-        desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
-        img: "img/smartwatchsolar.jpg"
-      },
-      {
-        nombre: { es: "Audífonos 360", en: "360 Headphones" },
-        desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
-        img: "img/audifonos.jpg"
-      },
-      {
-        nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
-        desc: { es: "Proyector portátil con entrada HDMI y USB.", en: "Portable projector with HDMI and USB input." },
-        img: "img/proyector.jpg"
-      },
-      {
-        nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
-        desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
-        img: "img/lampara.jpg"
-      },
-      {
-        nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
-        desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
-        img: "img/bocina.jpg"
-      },
-      {
-        nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
-        desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
-        img: "img/mouse.jpg"
-      },
-      {
-        nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
-        desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
-        img: "img/teclado.jpg"
-      },
-      {
-        nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
-        desc: { es: "Pantalla extra portátil para laptop o móvil.", en: "Extra portable screen for laptop or mobile." },
-        img: "img/pantalla.jpg"
-      },
-      {
-        nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
-        desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
-        img: "img/purificador.jpg"
-      },
-      {
-        nombre: { es: "Cámara 360°", en: "360° Camera" },
-        desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
-        img: "img/camara.jpg"
-      },
-      {
-        nombre: { es: "Drone mini", en: "Mini Drone" },
-        desc: { es: "Vuelo autónomo y grabación HD.", en: "Autonomous flight and HD recording." },
-        img: "img/drone.jpg"
-      },
-      {
-        nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
-        desc: { es: "Ideal para aventuras, con doble salida USB.", en: "Perfect for adventures, dual USB." },
-        img: "img/cargador.jpg"
-      }
-    ];
-
-    let idioma = localStorage.getItem('idioma') || 'es';
-    document.getElementById('idioma').value = idioma;
-
-    function renderizarProductos() {
-      const contenedor = document.getElementById("productos");
-      contenedor.innerHTML = "";
-      productos.forEach(p => {
-        const div = document.createElement("div");
-        div.className = "producto";
-        div.innerHTML = `
-          <div class="imagen-producto">
-            <img src="${p.img}" alt="${p.nombre[idioma]}">
-          </div>
-          <h3>${p.nombre[idioma]}</h3>
-          <p>${p.desc[idioma]}</p>
-          <button>${idioma === 'es' ? "Agregar al carrito" : "Add to cart"}</button>
-        `;
-        contenedor.appendChild(div);
-      });
-
-      document.getElementById("titulo").textContent = idioma === "es" ? "Tienda Tech" : "Tech Store";
-      document.getElementById("btn-masvendido").textContent = idioma === "es" ? "Lo más vendido" : "Top Sellers";
-      document.getElementById("btn-ofertas").textContent = idioma === "es" ? "Ofertas" : "Deals";
-      document.getElementById("btn-nuevo").textContent = idioma === "es" ? "Lo nuevo" : "New";
-      document.getElementById("btn-personalizados").textContent = idioma === "es" ? "Productos personalizados" : "Custom Products";
-      document.getElementById("btn-contacto").textContent = idioma === "es" ? "Contáctanos" : "Contact Us";
-      document.getElementById("btn-nosotros").textContent = idioma === "es" ? "Sobre nosotros" : "About Us";
-      document.getElementById("btn-carrito").textContent = idioma === "es" ? "Carrito" : "Cart";
-      document.getElementById("footer").innerHTML = idioma === "es"
-        ? "Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>Dirección: Calle Futura 123, Ciudad Tecno"
-        : "Contact: sales@tiendatech.com | Phone: +52 123 456 7890<br>Address: Future St. 123, Tech City";
+<script>
+  const productos = [
+    {
+      nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
+      desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
+      img: "img/smartwatchsolar.jpg"
+    },
+    {
+      nombre: { es: "Audífonos 360", en: "360 Headphones" },
+      desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
+      img: "img/audifonos.jpg"
+    },
+    {
+      nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
+      desc: { es: "Proyector portátil con entrada HDMI y USB.", en: "Portable projector with HDMI and USB input." },
+      img: "img/proyector.jpg"
+    },
+    {
+      nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
+      desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
+      img: "img/lampara.jpg"
+    },
+    {
+      nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
+      desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
+      img: "img/bocina.jpg"
+    },
+    {
+      nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
+      desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
+      img: "img/mouse.jpg"
+    },
+    {
+      nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
+      desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
+      img: "img/teclado.jpg"
+    },
+    {
+      nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
+      desc: { es: "Pantalla extra portátil para laptop o móvil.", en: "Extra portable screen for laptop or mobile." },
+      img: "img/pantalla.jpg"
+    },
+    {
+      nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
+      desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
+      img: "img/purificador.jpg"
+    },
+    {
+      nombre: { es: "Cámara 360°", en: "360° Camera" },
+      desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
+      img: "img/camara.jpg"
+    },
+    {
+      nombre: { es: "Drone mini", en: "Mini Drone" },
+      desc: { es: "Vuelo autónomo y grabación HD.", en: "Autonomous flight and HD recording." },
+      img: "img/drone.jpg"
+    },
+    {
+      nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
+      desc: { es: "Ideal para aventuras, con doble salida USB.", en: "Perfect for adventures, dual USB." },
+      img: "img/cargador.jpg"
     }
+  ];
 
-    function cambiarIdioma(lang) {
-      idioma = lang;
-      localStorage.setItem('idioma', idioma);
-      renderizarProductos();
-    }
+  let idioma = localStorage.getItem('idioma') || 'es';
+  document.getElementById('idioma').value = idioma;
 
-    function ir(ruta) {
-      window.location.href = ruta;
-    }
+  function renderizarProductos() {
+    const contenedor = document.getElementById("productos");
+    contenedor.innerHTML = "";
+    productos.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "producto";
+      div.innerHTML = `
+        <div class="imagen-producto">
+          <img src="${p.img}" alt="${p.nombre[idioma]}">
+        </div>
+        <h3>${p.nombre[idioma]}</h3>
+        <p>${p.desc[idioma]}</p>
+        <button>${idioma === 'es' ? "Agregar al carrito" : "Add to cart"}</button>
+      `;
+      contenedor.appendChild(div);
+    });
 
-    window.addEventListener("DOMContentLoaded", renderizarProductos);
-  </script>
+    document.getElementById("titulo").textContent = idioma === "es" ? "Tienda Tech" : "Tech Store";
+    document.getElementById("btn-masvendido").textContent = idioma === "es" ? "Lo más vendido" : "Top Sellers";
+    document.getElementById("btn-ofertas").textContent = idioma === "es" ? "Ofertas" : "Deals";
+    document.getElementById("btn-nuevo").textContent = idioma === "es" ? "Lo nuevo" : "New";
+    document.getElementById("btn-personalizados").textContent = idioma === "es" ? "Productos personalizados" : "Custom Products";
+    document.getElementById("btn-contacto").textContent = idioma === "es" ? "Contáctanos" : "Contact Us";
+    document.getElementById("btn-nosotros").textContent = idioma === "es" ? "Sobre nosotros" : "About Us";
+    document.getElementById("btn-carrito").textContent = idioma === "es" ? "Carrito" : "Cart";
+    document.getElementById("footer").innerHTML = idioma === "es"
+      ? "Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>Dirección: Calle Futura 123, Ciudad Tecno"
+      : "Contact: sales@tiendatech.com | Phone: +52 123 456 7890<br>Address: Future St. 123, Tech City";
+  }
+
+  function cambiarIdioma(lang) {
+    idioma = lang;
+    localStorage.setItem('idioma', idioma);
+    renderizarProductos();
+  }
+
+  function ir(ruta) {
+    window.location.href = ruta;
+  }
+
+  window.addEventListener("DOMContentLoaded", renderizarProductos);
+</script>
+
 </body>
 </html>
