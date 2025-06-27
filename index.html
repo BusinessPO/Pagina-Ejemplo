@@ -6,50 +6,42 @@
   <title>Tienda Tech</title>
   <style>
     body {
+ body, html {
       margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      background: url('img/textura.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      background-color: #e6e4dd;
-      padding-top: 60px;
     }
-
+    body {
+      background: url('img/textura.jpg') fixed cover #e6e4dd;
+    }
     header {
-      background-image: url('img/encabezado.jpg');
-      background-size: cover;
-      background-position: center;
-      text-align: center;
-      padding: 80px 20px 100px;
       position: relative;
+      text-align: center;
+      padding-top: 60px;  /* espacio para el título */
+      padding-bottom: 20px;
     }
-
-    h1 {
-  font-family: 'Cooper Black', serif;
-  font-size: 3em;
-  color: white; /* texto blanco */
-  text-shadow: 
-    -1px -1px 0 #6a7a8a,  
-    1px -1px 0 #6a7a8a,
-    -1px 1px 0 #6a7a8a,
-    1px 1px 0 #6a7a8a; /* contorno azul-gris */
-  margin: 0;
-}
-
-    nav {
-      position: fixed;
+    header::before {
+      content: "";
+      background: url('img/encabezado.jpg') center/cover no-repeat;
+      position: absolute;
       top: 0;
       left: 0;
-      height: 60px;
+      right: 0;
+      height: 250px;
+      z-index: -1;
+    }
+    nav {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
+      background: rgba(0,0,0,0.7);
+      padding: 12px 0;
       display: flex;
       justify-content: space-around;
-      background: rgba(0, 0, 0, 0.8);
-      align-items: center;
-      z-index: 1000;
+      z-index: 10;
       flex-wrap: wrap;
     }
-
     nav button, nav select {
       background: transparent;
       color: white;
@@ -58,8 +50,24 @@
       cursor: pointer;
       margin: 5px;
     }
-
-     main {
+    nav img {
+      vertical-align: middle;
+      height: 20px;
+    }
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-family: 'Cooper Black', serif;
+      font-size: 3em;
+      color: white;
+      text-shadow:
+        -1px -1px 0 #6a7a8a,
+         1px -1px 0 #6a7a8a,
+        -1px  1px 0 #6a7a8a,
+         1px  1px 0 #6a7a8a;
+    }
+    main {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 30px;
@@ -67,50 +75,44 @@
       max-width: 1200px;
       margin: 10px auto;
       justify-items: center;
-
     }
-
- .producto {
-  background: white;
-  border-radius: 10px;
-  padding: 15px;
-  width: 200px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  text-align: center;
-}
-
-/* Contenedor que rodea la imagen */
-.imagen-producto {
-  border: 1px solid #ccc;
-  padding: 5px;
-  margin-bottom: 12px;
-  background: #fafafa;
-  border-radius: 8px;
-  height: 140px;       /* Altura fija para el cuadrito */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* Imagen dentro del contenedor */
-.imagen-producto img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;  /* Mostrar la imagen completa, sin recortar ni deformar */
-  border-radius: 6px;
-}
-
+    .producto {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      width: 220px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .imagen-producto {
+      border: 1px solid #ccc;
+      padding: 5px;
+      margin-bottom: 12px;
+      background: #fafafa;
+      border-radius: 8px;
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .imagen-producto img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+    }
     .producto h3 {
-      font-family: 'Georgia', serif;
+      font-family: Georgia, serif;
       margin: 10px 0 5px;
     }
-
     .producto p {
       font-size: 0.9em;
       margin-bottom: 10px;
     }
-
     .producto button {
       background: #007bff;
       color: white;
@@ -119,13 +121,13 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
     footer {
       background: #ccc;
       padding: 20px;
       text-align: center;
       font-size: 0.9em;
       color: #333;
+      margin-top: 20px;
     }
 
     @media (max-width: 1024px) {
