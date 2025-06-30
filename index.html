@@ -508,8 +508,8 @@
 
     // Navegación simulada para que no pierdas diseño (puedes cambiar luego)
     function ir(ruta) {
-      alert('Aquí se debería navegar a: ' + ruta);
-    }
+  window.location.href = ruta;
+}
 
     // Eventos botón carrito
     document.getElementById('btn-carrito').addEventListener('click', abrirCarrito);
