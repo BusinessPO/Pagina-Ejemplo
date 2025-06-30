@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ofertas - Tienda Tech</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+  <nav>
+    <button onclick="ir('index.html')">Inicio</button>
+    <button onclick="ir('masvendido.html')">Lo más vendido</button>
+    <button onclick="ir('ofertas.html')">Ofertas</button>
+    <button onclick="ir('contacto.html')">Contáctanos</button>
+    <button id="btn-carrito">
+      Carrito <img src="img/carrito.png" alt="carrito" />
+      <span id="carrito-count">0</span>
+    </button>
+  </nav>
+
+  <div class="titulo-container">
+    <h1 id="titulo">Ofertas Especiales</h1>
+  </div>
+
+  <main id="productos"></main>
+
+  <script>
+    const productosOfertas = [
+      {
+        id: 5,
+        nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
+        desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
+        img: "img/bocina.jpg"
+      },
+      {
+        id: 6,
+        nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
+        desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
+        img: "img/mouse.jpg"
+      },
+      {
+        id: 7,
+        nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
+        desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
+        img: "img/teclado.jpg"
+      },
+      {
+        id: 9,
+        nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
+        desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
+        img: "img/purificador.jpg"
+      }
+    ];
+
+    // Guardar productos globalmente
+    localStorage.setItem('productos', JSON.stringify(productosOfertas));
+
+    // Idioma
+    let idioma = localStorage.getItem('idioma') || 'es';
+
+    // Carrito
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    function renderizarProductos() {
+      const contenedor = document.getElementById('productos');
+      contenedor.innerHTML = '';
+      productosOfertas.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'producto';
+
+        div.innerHTML = `
+          <img src="${p.img}" alt="${p.nombre[idioma]}" loading="lazy" />
+          <h3>${p.nombre[idioma]}</h3>
+          <p>${p.desc[idioma]}</p>
+          <a href="producto.html?id=${p.id}" class="ver-producto">Ver</a>
+        `;
+
+        contenedor.appendChild(div);
+      });
+    }
+
+    function actualizarContador() {
+      const count = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+      document.getElementById('carrito-count').textContent = count;
+    }
+
+    function ir(ruta) {
+      location.href = ruta;
+    }
+
+    renderizarProductos();
+    actualizarContador();
+  </script>
+  <style>
+    .ver-producto {
+      background: #28a745;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+      display: inline-block;
+    }
+    .ver-producto:hover {
+      background: #1e7e34;
+    }
+  </style>
+</body>
+</html>
