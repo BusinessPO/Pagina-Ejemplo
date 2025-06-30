@@ -1,18 +1,19 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;es&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot; /&gt;
-  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
-  &lt;title&gt;Tienda Tech&lt;/title&gt;
-  &lt;style&gt;
-    @import url(&#039;https://fonts.googleapis.com/css2?family=Cooper+Black&amp;display=swap&#039;);
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tienda Tech</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Cooper+Black&display=swap');
     * {
       box-sizing: border-box;
     }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url(&#039;img/textura.jpg&#039;) no-repeat center center fixed;
+      background: url('img/textura.jpg') no-repeat center center fixed;
       background-size: cover;
       background-color: #e6e4dd;
       color: #222;
@@ -69,7 +70,7 @@
     }
     .titulo-container {
       margin-top: 56px;
-      background-image: url(&#039;img/encabezado.jpg&#039;);
+      background-image: url('img/encabezado.jpg');
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -81,7 +82,7 @@
       box-shadow: inset 0 0 50px 25px rgba(230,228,221,0.9);
     }
     h1#titulo {
-      font-family: &#039;Cooper Black&#039;, serif;
+      font-family: 'Cooper Black', serif;
       font-size: 3rem;
       color: white;
       text-shadow:
@@ -129,7 +130,7 @@
       user-select: none;
     }
     .producto h3 {
-      font-family: &#039;Cooper Black&#039;, serif;
+      font-family: 'Cooper Black', serif;
       font-size: 1.1rem;
       margin: 0 0 8px 0;
       color: #222;
@@ -193,7 +194,7 @@
     }
     #modal-carrito h2 {
       margin-top: 0;
-      font-family: &#039;Cooper Black&#039;, serif;
+      font-family: 'Cooper Black', serif;
       font-size: 1.8rem;
       color: #222;
       user-select: none;
@@ -283,151 +284,146 @@
         margin: 0 auto;
       }
     }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;nav&gt;
-    &lt;button onclick=&quot;ir(&#039;masvendido.html&#039;)&quot; id=&quot;btn-masvendido&quot;&gt;Lo m&aacute;s vendido&lt;/button&gt;
-    &lt;button onclick=&quot;ir(&#039;ofertas.html&#039;)&quot; id=&quot;btn-ofertas&quot;&gt;Ofertas&lt;/button&gt;
-    &lt;button onclick=&quot;ir(&#039;nuevo.html&#039;)&quot; id=&quot;btn-nuevo&quot;&gt;Lo nuevo&lt;/button&gt;
-    &lt;button onclick=&quot;ir(&#039;personalizados.html&#039;)&quot; id=&quot;btn-personalizados&quot;&gt;Productos personalizados&lt;/button&gt;
-    &lt;button onclick=&quot;ir(&#039;contacto.html&#039;)&quot; id=&quot;btn-contacto&quot;&gt;Cont&aacute;ctanos&lt;/button&gt;
-    &lt;button onclick=&quot;ir(&#039;nosotros.html&#039;)&quot; id=&quot;btn-nosotros&quot;&gt;Sobre nosotros&lt;/button&gt;
-    &lt;button id=&quot;btn-carrito&quot; aria-label=&quot;Abrir carrito&quot;&gt;
-      Carrito
-      &lt;img src=&quot;img/carrito.png&quot; alt=&quot;Carrito&quot; /&gt;
-      &lt;span id=&quot;carrito-count&quot; aria-live=&quot;polite&quot;&gt;0&lt;/span&gt;
-    &lt;/button&gt;
-    &lt;select id=&quot;idioma&quot; onchange=&quot;cambiarIdioma(this.value)&quot; aria-label=&quot;Seleccionar idioma&quot;&gt;
-      &lt;option value=&quot;es&quot;&gt;ES&lt;/option&gt;
-      &lt;option value=&quot;en&quot;&gt;EN&lt;/option&gt;
-    &lt;/select&gt;
-  &lt;/nav&gt;
+  </style>
+</head>
 
-  &lt;div class=&quot;titulo-container&quot;&gt;
-    &lt;h1 id=&quot;titulo&quot;&gt;Tienda Tech&lt;/h1&gt;
-  &lt;/div&gt;
-
-  &lt;main id=&quot;productos&quot;&gt;&lt;/main&gt;
-
-  &lt;footer id=&quot;footer&quot;&gt;
-    Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890&lt;br /&gt;
-    Direcci&oacute;n: Calle Futura 123, Ciudad Tecno
-  &lt;/footer&gt;
-
-  &lt;!-- Modal carrito --&gt;
-  &lt;div id=&quot;modal-carrito&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;modal-title&quot;&gt;
-    &lt;div class=&quot;contenido&quot;&gt;
-      &lt;h2 id=&quot;modal-title&quot;&gt;Carrito de Compras&lt;/h2&gt;
-      &lt;ul id=&quot;lista-carrito&quot;&gt;&lt;/ul&gt;
-      &lt;button id=&quot;vaciar-carrito&quot; aria-label=&quot;Vaciar carrito&quot;&gt;Vaciar carrito&lt;/button&gt;
-      &lt;button id=&quot;cerrar-carrito&quot; aria-label=&quot;Cerrar carrito&quot;&gt;X&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-  &lt;script&gt;
-    const productos = [
+<body>
+  <nav>
+    <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
+    <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
+    <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
+    <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
+    <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
+    <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
+    <button id="btn-carrito" aria-label="Abrir carrito">Carrito
+      <img src="img/carrito.png" alt="Carrito" />
+      <span id="carrito-count" aria-live="polite"></span>
+    </button>
+    <select id="idioma" onchange="cambiarIdioma(this.value)" aria-label="Seleccionar idioma">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
+  <div class="titulo-container">
+    <h1 id="titulo">Tienda Tech</h1>
+  </div>
+  <main id="productos">
+  </main>
+  <footer id="footer">Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890
+    <br />Dirección: Calle Futura 123, Ciudad Tecno</footer>
+  <!-- Modal carrito -->
+  <div id="modal-carrito" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="contenido">
+      <h2 id="modal-title">Carrito de Compras</h2>
+      <ul id="lista-carrito">
+      </ul>
+      <button id="vaciar-carrito" aria-label="Vaciar carrito">Vaciar carrito</button>
+      <button id="cerrar-carrito" aria-label="Cerrar carrito">X</button>
+    </div>
+  </div>
+  <script>
+  const productos = [
       {
         id: 1,
-        nombre: { es: &quot;Smartwatch Solar&quot;, en: &quot;Solar Smartwatch&quot; },
-        desc: { es: &quot;Reloj inteligente con carga solar y monitoreo de salud.&quot;, en: &quot;Smartwatch with solar charging and health tracking.&quot; },
-        img: &quot;img/smartwatchsolar.jpg&quot;
+        nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
+        desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
+        img: "img/smartwatchsolar.jpg"
       },
       {
         id: 2,
-        nombre: { es: &quot;Aud&iacute;fonos 360&quot;, en: &quot;360 Headphones&quot; },
-        desc: { es: &quot;Audio envolvente con cancelaci&oacute;n de ruido activa.&quot;, en: &quot;Immersive sound with active noise cancelling.&quot; },
-        img: &quot;img/audifonos.jpg&quot;
+        nombre: { es: "Audífonos 360", en: "360 Headphones" },
+        desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
+        img: "img/audifonos.jpg"
       },
       {
         id: 3,
-        nombre: { es: &quot;Mini Proyector LED&quot;, en: &quot;Mini LED Projector&quot; },
-        desc: { es: &quot;Proyector port&aacute;til con entrada HDMI y USB.&quot;, en: &quot;Portable projector with HDMI and USB input.&quot; },
-        img: &quot;img/proyector.jpg&quot;
+        nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
+        desc: { es: "Proyector portátil con entrada HDMI y USB.", en: "Portable projector with HDMI and USB input." },
+        img: "img/proyector.jpg"
       },
       {
         id: 4,
-        nombre: { es: &quot;L&aacute;mpara UV de escritorio&quot;, en: &quot;UV Desk Lamp&quot; },
-        desc: { es: &quot;L&aacute;mpara LED con desinfecci&oacute;n UV autom&aacute;tica.&quot;, en: &quot;LED lamp with automatic UV sterilization.&quot; },
-        img: &quot;img/lampara.jpg&quot;
+        nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
+        desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
+        img: "img/lampara.jpg"
       },
       {
         id: 5,
-        nombre: { es: &quot;Bocina bluetooth resistente&quot;, en: &quot;Rugged Bluetooth Speaker&quot; },
-        desc: { es: &quot;Sonido potente y resistente al agua IP67.&quot;, en: &quot;Powerful sound, water resistant (IP67).&quot; },
-        img: &quot;img/bocina.jpg&quot;
+        nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
+        desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
+        img: "img/bocina.jpg"
       },
       {
         id: 6,
-        nombre: { es: &quot;Mouse ergon&oacute;mico&quot;, en: &quot;Ergonomic Mouse&quot; },
-        desc: { es: &quot;Dise&ntilde;o c&oacute;modo para largas jornadas de trabajo.&quot;, en: &quot;Comfortable design for long work hours.&quot; },
-        img: &quot;img/mouse.jpg&quot;
+        nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
+        desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
+        img: "img/mouse.jpg"
       },
       {
         id: 7,
-        nombre: { es: &quot;Teclado mec&aacute;nico RGB&quot;, en: &quot;RGB Mechanical Keyboard&quot; },
-        desc: { es: &quot;Conexi&oacute;n USB-C, teclas retroiluminadas.&quot;, en: &quot;USB-C, backlit keys.&quot; },
-        img: &quot;img/teclado.jpg&quot;
+        nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
+        desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
+        img: "img/teclado.jpg"
       },
       {
         id: 8,
-        nombre: { es: &quot;Pantalla plegable 12&#039;&#039;&quot;, en: &quot;Foldable Display 12&#039;&#039;&quot; },
-        desc: { es: &quot;Pantalla extra port&aacute;til para laptop o m&oacute;vil.&quot;, en: &quot;Extra portable screen for laptop or mobile.&quot; },
-        img: &quot;img/pantalla.jpg&quot;
+        nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
+        desc: { es: "Pantalla extra portátil para laptop o móvil.", en: "Extra portable screen for laptop or mobile." },
+        img: "img/pantalla.jpg"
       },
       {
         id: 9,
-        nombre: { es: &quot;Purificador port&aacute;til&quot;, en: &quot;Portable Air Purifier&quot; },
-        desc: { es: &quot;Limpieza de aire con filtro HEPA.&quot;, en: &quot;Air cleaning with HEPA filter.&quot; },
-        img: &quot;img/purificador.jpg&quot;
+        nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
+        desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
+        img: "img/purificador.jpg"
       },
       {
         id: 10,
-        nombre: { es: &quot;C&aacute;mara 360&deg;&quot;, en: &quot;360&deg; Camera&quot; },
-        desc: { es: &quot;Captura en tiempo real en 360 grados.&quot;, en: &quot;Real-time 360-degree capture.&quot; },
-        img: &quot;img/camara.jpg&quot;
+        nombre: { es: "Cámara 360°", en: "360° Camera" },
+        desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
+        img: "img/camara.jpg"
       },
       {
         id: 11,
-        nombre: { es: &quot;Drone mini&quot;, en: &quot;Mini Drone&quot; },
-        desc: { es: &quot;Vuelo aut&oacute;nomo y grabaci&oacute;n HD.&quot;, en: &quot;Autonomous flight and HD recording.&quot; },
-        img: &quot;img/drone.jpg&quot;
+        nombre: { es: "Drone mini", en: "Mini Drone" },
+        desc: { es: "Vuelo autónomo y grabación HD.", en: "Autonomous flight and HD recording." },
+        img: "img/drone.jpg"
       },
       {
         id: 12,
-        nombre: { es: &quot;Cargador solar port&aacute;til&quot;, en: &quot;Portable Solar Charger&quot; },
-        desc: { es: &quot;Ideal para aventuras, con doble salida USB.&quot;, en: &quot;Perfect for adventures, dual USB.&quot; },
-        img: &quot;img/cargador.jpg&quot;
+        nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
+        desc: { es: "Ideal para aventuras, con doble salida USB.", en: "Perfect for adventures, dual USB." },
+        img: "img/cargador.jpg"
       }
     ];
 
     // Idioma
-    let idioma = localStorage.getItem(&#039;idioma&#039;) || &#039;es&#039;;
-    document.getElementById(&#039;idioma&#039;).value = idioma;
+    let idioma = localStorage.getItem('idioma') || 'es';
+    document.getElementById('idioma').value = idioma;
 
     // Carrito: array de {id, cantidad}
-    let carrito = JSON.parse(localStorage.getItem(&#039;carrito&#039;)) || [];
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     function renderizarProductos() {
-      const contenedor = document.getElementById(&#039;productos&#039;);
-      contenedor.innerHTML = &#039;&#039;;
-      productos.forEach(p =&gt; {
-        const div = document.createElement(&#039;div&#039;);
-        div.className = &#039;producto&#039;;
+      const contenedor = document.getElementById('productos');
+      contenedor.innerHTML = '';
+      productos.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'producto';
 
         div.innerHTML = `
-          &lt;img src=&quot;${p.img}&quot; alt=&quot;${p.nombre[idioma]}&quot; loading=&quot;lazy&quot; /&gt;
-          &lt;h3&gt;${p.nombre[idioma]}&lt;/h3&gt;
-          &lt;p&gt;${p.desc[idioma]}&lt;/p&gt;
-          &lt;button class=&quot;agregar-carrito&quot; data-id=&quot;${p.id}&quot;&gt;Agregar al carrito&lt;/button&gt;
+          <img src="${p.img}" alt="${p.nombre[idioma]}" loading="lazy" />
+          <h3>${p.nombre[idioma]}</h3>
+          <p>${p.desc[idioma]}</p>
+          <button class="agregar-carrito" data-id="${p.id}">Agregar al carrito</button>
         `;
 
         contenedor.appendChild(div);
       });
 
       // Eventos para botones agregar
-      document.querySelectorAll(&#039;.agregar-carrito&#039;).forEach(btn =&gt; {
-        btn.addEventListener(&#039;click&#039;, e =&gt; {
+      document.querySelectorAll('.agregar-carrito').forEach(btn => {
+        btn.addEventListener('click', e => {
           const id = parseInt(e.target.dataset.id);
           agregarAlCarrito(id);
         });
@@ -435,45 +431,45 @@
     }
 
     function agregarAlCarrito(id) {
-      const item = carrito.find(i =&gt; i.id === id);
+      const item = carrito.find(i => i.id === id);
       if(item){
         item.cantidad++;
       } else {
         carrito.push({id, cantidad:1});
       }
-      localStorage.setItem(&#039;carrito&#039;, JSON.stringify(carrito));
+      localStorage.setItem('carrito', JSON.stringify(carrito));
       actualizarContador();
-      alert(&#039;Producto agregado al carrito&#039;);
+      alert('Producto agregado al carrito');
     }
 
     function actualizarContador() {
-      const count = carrito.reduce((acc, item) =&gt; acc + item.cantidad, 0);
-      document.getElementById(&#039;carrito-count&#039;).textContent = count;
+      const count = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+      document.getElementById('carrito-count').textContent = count;
     }
 
     // Mostrar modal carrito
-    const modalCarrito = document.getElementById(&#039;modal-carrito&#039;);
-    const listaCarrito = document.getElementById(&#039;lista-carrito&#039;);
+    const modalCarrito = document.getElementById('modal-carrito');
+    const listaCarrito = document.getElementById('lista-carrito');
 
     function abrirCarrito() {
       renderizarCarrito();
-      modalCarrito.style.display = &#039;flex&#039;;
+      modalCarrito.style.display = 'flex';
     }
 
     function cerrarCarrito() {
-      modalCarrito.style.display = &#039;none&#039;;
+      modalCarrito.style.display = 'none';
     }
 
     function renderizarCarrito() {
-      listaCarrito.innerHTML = &#039;&#039;;
+      listaCarrito.innerHTML = '';
       if(carrito.length === 0) {
-        listaCarrito.innerHTML = &#039;&lt;li&gt;El carrito est&aacute; vac&iacute;o.&lt;/li&gt;&#039;;
+        listaCarrito.innerHTML = '<li>El carrito está vacío.</li>';
         return;
       }
-      carrito.forEach(item =&gt; {
-        const producto = productos.find(p =&gt; p.id === item.id);
+      carrito.forEach(item => {
+        const producto = productos.find(p => p.id === item.id);
         if(!producto) return;
-        const li = document.createElement(&#039;li&#039;);
+        const li = document.createElement('li');
         li.textContent = `${producto.nombre[idioma]} x${item.cantidad}`;
         listaCarrito.appendChild(li);
       });
@@ -482,7 +478,7 @@
     // Vaciar carrito
     function vaciarCarrito() {
       carrito = [];
-      localStorage.removeItem(&#039;carrito&#039;);
+      localStorage.removeItem('carrito');
       actualizarContador();
       renderizarCarrito();
     }
@@ -490,35 +486,36 @@
     // Cambiar idioma
     function cambiarIdioma(lang) {
       idioma = lang;
-      localStorage.setItem(&#039;idioma&#039;, idioma);
+      localStorage.setItem('idioma', idioma);
       renderizarProductos();
       actualizarContador();
       actualizarTextoTitulo();
     }
 
     function actualizarTextoTitulo() {
-      const titulo = document.getElementById(&#039;titulo&#039;);
-      if(idioma === &#039;es&#039;) {
-        titulo.textContent = &#039;Tienda Tech&#039;;
+      const titulo = document.getElementById('titulo');
+      if(idioma === 'es') {
+        titulo.textContent = 'Tienda Tech';
       } else {
-        titulo.textContent = &#039;Tech Store&#039;;
+        titulo.textContent = 'Tech Store';
       }
     }
 
-    // Navegaci&oacute;n simulada para que no pierdas dise&ntilde;o (puedes cambiar luego)
+    // Navegación simulada para que no pierdas diseño (puedes cambiar luego)
     function ir(ruta) {
-      alert(&#039;Aqu&iacute; se deber&iacute;a navegar a: &#039; + ruta);
+      alert('Aquí se debería navegar a: ' + ruta);
     }
 
-    // Eventos bot&oacute;n carrito
-    document.getElementById(&#039;btn-carrito&#039;).addEventListener(&#039;click&#039;, abrirCarrito);
-    document.getElementById(&#039;cerrar-carrito&#039;).addEventListener(&#039;click&#039;, cerrarCarrito);
-    document.getElementById(&#039;vaciar-carrito&#039;).addEventListener(&#039;click&#039;, vaciarCarrito);
+    // Eventos botón carrito
+    document.getElementById('btn-carrito').addEventListener('click', abrirCarrito);
+    document.getElementById('cerrar-carrito').addEventListener('click', cerrarCarrito);
+    document.getElementById('vaciar-carrito').addEventListener('click', vaciarCarrito);
 
     // Iniciar
     renderizarProductos();
     actualizarContador();
     actualizarTextoTitulo();
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+  </script>
+</body>
+
+</html>
