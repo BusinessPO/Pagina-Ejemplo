@@ -287,22 +287,22 @@
 </head>
 <body>
   <nav>
-    <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
-    <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
-    <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
-    <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
-    <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
-    <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
-    <button id="btn-carrito" aria-label="Abrir carrito">
-      Carrito
-      <img src="img/carrito.png" alt="Carrito" />
-      <span id="carrito-count" aria-live="polite">0</span>
-    </button>
-    <select id="idioma" onchange="cambiarIdioma(this.value)" aria-label="Seleccionar idioma">
-      <option value="es">ES</option>
-      <option value="en">EN</option>
-    </select>
-  </nav>
+  <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
+  <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
+  <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
+  <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
+  <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
+  <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
+  <button id="btn-carrito" aria-label="Abrir carrito">
+    Carrito
+    <img src="img/carrito.png" alt="Carrito" />
+    <span id="carrito-count" aria-live="polite">0</span>
+  </button>
+  <select id="idioma" onchange="cambiarIdioma(this.value)" aria-label="Seleccionar idioma">
+    <option value="es">ES</option>
+    <option value="en">EN</option>
+  </select>
+</nav>
 
   <div class="titulo-container">
     <h1 id="titulo">Lo más vendido</h1>
@@ -450,9 +450,9 @@
       titulo.textContent = idioma === 'es' ? 'Lo más vendido' : 'Best Sellers';
     }
 
-    function ir(ruta) {
-      alert('Aquí se debería navegar a: ' + ruta);
-    }
+   function ir(ruta) {
+  window.location.href = ruta;
+}
 
     document.getElementById('btn-carrito').addEventListener('click', abrirCarrito);
     document.getElementById('cerrar-carrito').addEventListener('click', cerrarCarrito);
