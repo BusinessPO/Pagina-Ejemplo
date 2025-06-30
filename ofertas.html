@@ -3,29 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ofertas - Tienda Tech</title>
+  <title>Ofertas | Tienda Tech</title>
   <link rel="stylesheet" href="estilo.css" />
 </head>
 <body>
   <nav>
-    <button onclick="ir('index.html')">Inicio</button>
     <button onclick="ir('masvendido.html')">Lo más vendido</button>
     <button onclick="ir('ofertas.html')">Ofertas</button>
+    <button onclick="ir('nuevo.html')">Lo nuevo</button>
+    <button onclick="ir('personalizados.html')">Productos personalizados</button>
     <button onclick="ir('contacto.html')">Contáctanos</button>
+    <button onclick="ir('nosotros.html')">Sobre nosotros</button>
     <button id="btn-carrito">
-      Carrito <img src="img/carrito.png" alt="carrito" />
+      Carrito
+      <img src="img/carrito.png" alt="Carrito" />
       <span id="carrito-count">0</span>
     </button>
+    <select id="idioma" onchange="cambiarIdioma(this.value)">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
   </nav>
 
   <div class="titulo-container">
-    <h1 id="titulo">Ofertas Especiales</h1>
+    <h1 id="titulo">Ofertas</h1>
   </div>
 
   <main id="productos"></main>
 
+  <footer>
+    Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br />
+    Dirección: Calle Futura 123, Ciudad Tecno
+  </footer>
+
   <script>
-    const productosOfertas = [
+    const productos = [
       {
         id: 5,
         nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
@@ -39,32 +51,26 @@
         img: "img/mouse.jpg"
       },
       {
-        id: 7,
-        nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
-        desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
-        img: "img/teclado.jpg"
-      },
-      {
         id: 9,
         nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
         desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
         img: "img/purificador.jpg"
+      },
+      {
+        id: 12,
+        nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
+        desc: { es: "Ideal para aventuras, con doble salida USB.", en: "Perfect for adventures, dual USB." },
+        img: "img/cargador.jpg"
       }
     ];
 
-    // Guardar productos globalmente
-    localStorage.setItem('productos', JSON.stringify(productosOfertas));
-
-    // Idioma
     let idioma = localStorage.getItem('idioma') || 'es';
-
-    // Carrito
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    document.getElementById('idioma').value = idioma;
 
     function renderizarProductos() {
       const contenedor = document.getElementById('productos');
       contenedor.innerHTML = '';
-      productosOfertas.forEach(p => {
+      productos.forEach(p => {
         const div = document.createElement('div');
         div.className = 'producto';
 
@@ -72,39 +78,156 @@
           <img src="${p.img}" alt="${p.nombre[idioma]}" loading="lazy" />
           <h3>${p.nombre[idioma]}</h3>
           <p>${p.desc[idioma]}</p>
-          <a href="producto.html?id=${p.id}" class="ver-producto">Ver</a>
+          <button onclick="verProducto(${p.id})">Ver</button>
         `;
-
         contenedor.appendChild(div);
       });
     }
 
-    function actualizarContador() {
-      const count = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-      document.getElementById('carrito-count').textContent = count;
+    function verProducto(id) {
+      window.location.href = 'producto.html?id=' + id;
     }
 
     function ir(ruta) {
-      location.href = ruta;
+      window.location.href = ruta;
+    }
+
+    function cambiarIdioma(lang) {
+      idioma = lang;
+      localStorage.setItem('idioma', lang);
+      renderizarProductos();
     }
 
     renderizarProductos();
-    actualizarContador();
   </script>
+
   <style>
-    .ver-producto {
-      background: #28a745;
+    @import url('https://fonts.googleapis.com/css2?family=Cooper+Black&display=swap');
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('img/textura.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #e6e4dd;
+      color: #222;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px 10px;
+      z-index: 10000;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    nav button, nav select {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      font-weight: bold;
+    }
+    nav button:hover, nav select:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    nav img {
+      height: 18px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    #carrito-count {
+      background: red;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      color: white;
+    }
+    .titulo-container {
+      margin-top: 56px;
+      background-image: url('img/encabezado.jpg');
+      background-position: center;
+      background-size: cover;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 50px 25px rgba(230,228,221,0.9);
+    }
+    h1#titulo {
+      font-family: 'Cooper Black', serif;
+      font-size: 3rem;
+      color: white;
+      text-shadow: 2px 2px 4px #333;
+      margin: 0;
+    }
+    main#productos {
+      max-width: 1200px;
+      margin: 40px auto 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px 32px;
+      padding: 0 15px;
+    }
+    .producto {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      text-align: center;
+      padding: 16px;
+      transition: transform 0.25s ease;
+    }
+    .producto:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgb(0 0 0 / 0.2);
+    }
+    .producto img {
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      border-radius: 6px;
+      background: #f0f0f0;
+    }
+    .producto h3 {
+      font-family: 'Cooper Black', serif;
+      font-size: 1.1rem;
+      margin: 12px 0 8px;
+    }
+    .producto p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .producto button {
+      background: #007bff;
       color: white;
       padding: 8px 12px;
+      border: none;
       border-radius: 6px;
-      text-decoration: none;
       font-weight: bold;
-      transition: background-color 0.3s;
-      margin-top: 10px;
-      display: inline-block;
+      cursor: pointer;
     }
-    .ver-producto:hover {
-      background: #1e7e34;
+    .producto button:hover {
+      background: #0056b3;
+    }
+    footer {
+      background: rgba(230, 228, 221, 0.9);
+      padding: 20px 10px;
+      font-size: 0.9rem;
+      text-align: center;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
     }
   </style>
 </body>
