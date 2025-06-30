@@ -6,6 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tienda Tech</title>
   <style>
+    .ver-producto {
+  background: #28a745;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+  display: inline-block;
+}
+.ver-producto:hover {
+  background: #1e7e34;
+}
+
     @import url('https://fonts.googleapis.com/css2?family=Cooper+Black&display=swap');
     * {
       box-sizing: border-box;
@@ -420,7 +435,7 @@
           <img src="${p.img}" alt="${p.nombre[idioma]}" loading="lazy" />
           <h3>${p.nombre[idioma]}</h3>
           <p>${p.desc[idioma]}</p>
-          <button class="agregar-carrito" data-id="${p.id}">Agregar al carrito</button>
+          <a href="producto.html?id=${p.id}" class="ver-producto">Ver</a>
         `;
 
         contenedor.appendChild(div);
