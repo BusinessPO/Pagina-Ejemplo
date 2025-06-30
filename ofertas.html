@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ofertas - Tienda Tech</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <nav>
+    <button onclick="location.href='index.html'">Inicio</button>
+    <button onclick="location.href='masvendido.html'">Lo más vendido</button>
+    <button onclick="location.href='ofertas.html'">Ofertas</button>
+    <button onclick="location.href='nuevo.html'">Lo nuevo</button>
+    <button onclick="location.href='personalizados.html'">Productos personalizados</button>
+    <button onclick="location.href='contacto.html'">Contáctanos</button>
+    <button onclick="location.href='nosotros.html'">Sobre nosotros</button>
+    <button id="btn-carrito">
+      Carrito <img src="img/carrito.png" alt="Carrito">
+      <span id="carrito-count">0</span>
+    </button>
+    <select id="idioma" onchange="cambiarIdioma(this.value)">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
+
+  <div class="titulo-container">
+    <h1 id="titulo">Ofertas</h1>
+  </div>
+
+  <main id="productos"></main>
+
+  <footer>
+    Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br />
+    Dirección: Calle Futura 123, Ciudad Tecno
+  </footer>
+
+  <div id="modal-carrito">
+    <div class="contenido">
+      <h2>Carrito de Compras</h2>
+      <ul id="lista-carrito"></ul>
+      <button id="vaciar-carrito">Vaciar carrito</button>
+      <button id="cerrar-carrito">X</button>
+    </div>
+  </div>
+
+  <script>
+    const productos = [
+      {
+        id: 13,
+        nombre: { es: "Soporte ajustable", en: "Adjustable Stand" },
+        desc: { es: "Soporte multiángulo para tablet o teléfono.", en: "Multi-angle stand for tablet or phone." },
+        img: "img/soporte.jpg"
+      },
+      {
+        id: 14,
+        nombre: { es: "Hub USB-C 6 en 1", en: "USB-C Hub 6-in-1" },
+        desc: { es: "Expansión de puertos con HDMI y lector SD.", en: "Port expansion with HDMI and SD reader." },
+        img: "img/hub.jpg"
+      },
+      {
+        id: 15,
+        nombre: { es: "Cámara Web Full HD", en: "Full HD Webcam" },
+        desc: { es: "Videollamadas con micrófono incorporado.", en: "Video calls with built-in mic." },
+        img: "img/webcam.jpg"
+      },
+      {
+        id: 16,
+        nombre: { es: "Luces LED decorativas", en: "Decorative LED Lights" },
+        desc: { es: "Tira LED RGB para ambientar tu espacio.", en: "RGB LED strip to light up your space." },
+        img: "img/leds.jpg"
+      }
+    ];
+
+    let idioma = localStorage.getItem('idioma') || 'es';
+    document.getElementById('idioma').value = idioma;
+
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    function renderizarProductos() {
+      const contenedor = document.getElementById('productos');
+      contenedor.innerHTML = '';
+      productos.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'producto';
+        div.innerHTML = `
+          <img src="${p.img}" alt="${p.nombre[idioma]}">
+          <h3>${p.nombre[idioma]}</h3>
+          <p>${p.desc[idioma]}</p>
+          <button class="agregar-carrito" data-id="${p.id}">Agregar al carrito</button>
+        `;
+        contenedor.appendChild(div);
+      });
+      document.querySelectorAll('.agregar-carrito').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const id = parseInt(e.target.dataset.id);
+          agregarAlCarrito(id);
+        });
+      });
+    }
+
+    function agregarAlCarrito(id) {
+      const item = carrito.find(i => i.id === id);
+      if(item){ item.cantidad++; }
+      else { carrito.push({id, cantidad:1}); }
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      actualizarContador();
+      alert('Producto agregado al carrito');
+    }
+
+    function actualizarContador() {
+      const count = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+      document.getElementById('carrito-count').textContent = count;
+    }
+
+    function abrirCarrito() {
+      renderizarCarrito();
+      document.getElementById('modal-carrito').style.display = 'flex';
+    }
+
+    function cerrarCarrito() {
+      document.getElementById('modal-carrito').style.display = 'none';
+    }
+
+    function vaciarCarrito() {
+      carrito = [];
+      localStorage.removeItem('carrito');
+      actualizarContador();
+      renderizarCarrito();
+    }
+
+    function renderizarCarrito() {
+      const lista = document.getElementById('lista-carrito');
+      lista.innerHTML = '';
+      if(carrito.length === 0){
+        lista.innerHTML = '<li>El carrito está vacío.</li>';
+        return;
+      }
+      carrito.forEach(item => {
+        const producto = productos.find(p => p.id === item.id);
+        if(!producto) return;
+        const li = document.createElement('li');
+        li.textContent = `${producto.nombre[idioma]} x${item.cantidad}`;
+        lista.appendChild(li);
+      });
+    }
+
+    function cambiarIdioma(lang) {
+      idioma = lang;
+      localStorage.setItem('idioma', idioma);
+      renderizarProductos();
+    }
+
+    document.getElementById('btn-carrito').addEventListener('click', abrirCarrito);
+    document.getElementById('cerrar-carrito').addEventListener('click', cerrarCarrito);
+    document.getElementById('vaciar-carrito').addEventListener('click', vaciarCarrito);
+
+    renderizarProductos();
+    actualizarContador();
+  </script>
+</body>
+</html>
