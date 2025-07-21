@@ -1,49 +1,29 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tienda Tech</title>
+  <title>Tiendatech</title>
   <style>
-    .ver-producto {
-  background: #0019b8;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  margin-top: 10px;
-  display: inline-block;
-}
-.ver-producto:hover {
-  background: #0019b8;
-}
-
     @import url('https://fonts.googleapis.com/css2?family=Cooper+Black&display=swap');
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('img/textura.jpg') no-repeat center center fixed;
+      background: url('admin/img/textura.jpg') no-repeat center center fixed;
       background-size: cover;
-      background-color: #e6e4dd;
       color: #222;
     }
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       background: rgba(0,0,0,0.6);
       display: flex;
       justify-content: center;
       gap: 20px;
-      padding: 12px 10px;
-      z-index: 10000;
+      padding: 12px;
+      z-index: 1000;
       flex-wrap: wrap;
       align-items: center;
     }
@@ -57,81 +37,88 @@
       border-radius: 6px;
       transition: background-color 0.3s;
       font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
     nav button:hover, nav select:hover {
-      background: rgba(255 255 255 / 0.2);
+      background: rgba(255,255,255,0.2);
     }
-    nav button img {
-      vertical-align: middle;
+    #user-btn {
+      background: #28a745;
+      color: white;
+    }
+    #user-btn:hover {
+      background: #218838;
+    }
+    #btn-carrito {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    #btn-carrito img {
       height: 18px;
-      user-select: none;
-      pointer-events: none;
+      margin-left: 4px;
       filter: brightness(100%) contrast(120%);
     }
-    /* Carrito contador */
     #carrito-count {
       background: #f00;
       border-radius: 50%;
-      color: white;
-      font-weight: bold;
+      color: #fff;
       font-size: 0.75rem;
       padding: 2px 6px;
-      margin-left: 2px;
-      vertical-align: top;
-      user-select: none;
+      position: absolute;
+      top: -6px;
+      right: -8px;
     }
     .titulo-container {
       margin-top: 56px;
-      background-image: url('img/encabezado.jpg');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+      background: url('admin/img/encabezado.jpg') center/cover no-repeat;
       height: 120px;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
       box-shadow: inset 0 0 50px 25px rgba(230,228,221,0.9);
     }
     h1#titulo {
-      font-family: 'Cooper Black', serif;
+      font-family: 'Cooper Black', cursive;
       font-size: 3rem;
-      color: rgb(12, 26, 66);
-      text-shadow:
-        -1px -1px 0 #afcfc4,
-         1px -1px 0 #afcfc4,
-        -1px  1px 0 #afcfc4,
-         1px  1px 0 #afcfc4;
+      color: rgb(12,26,66);
+      text-shadow: -1px -1px 0 #afcfc4, 1px -1px 0 #afcfc4, -1px 1px 0 #afcfc4, 1px 1px 0 #afcfc4;
       margin: 0;
-      padding: 0 20px;
-      user-select: none;
+    }
+    .filtro-bar {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      padding: 0 15px;
+      flex-wrap: wrap;
+    }
+    .filtro-bar input, .filtro-bar select, .filtro-bar label {
+      font-size: 0.9rem;
+      padding: 6px;
     }
     main#productos {
       max-width: 1200px;
-      margin: 40px auto 80px;
+      margin: 20px auto 80px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 24px 32px;
       padding: 0 15px;
     }
     .producto {
-      width: 200px;
+      position: relative;
       background: #fff;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-      cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 16px;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
     .producto:hover {
-      box-shadow: 0 8px 16px rgb(0 0 0 / 0.2);
       transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
     .producto img {
       width: 100%;
@@ -141,55 +128,71 @@
       border: 1px solid #ddd;
       background: #fafafa;
       margin-bottom: 12px;
-      pointer-events: none;
-      user-select: none;
     }
     .producto h3 {
-      font-family: 'Cooper Black', serif;
+      font-family: 'Cooper Black', cursive;
       font-size: 1.1rem;
-      margin: 0 0 8px 0;
-      color: #222;
+      margin: 0 0 8px;
       text-align: center;
     }
     .producto p {
-      font-family: Arial, sans-serif;
       font-size: 0.9rem;
       color: #555;
       text-align: center;
       flex-grow: 1;
-      user-select: none;
     }
-    .producto button.agregar-carrito {
-      background: #007bff;
-      border: none;
-      color: white;
-      font-weight: bold;
+    .ver-producto {
+      background: #0019b8;
+      color: #fff;
       padding: 8px 12px;
       border-radius: 6px;
-      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
       margin-top: 10px;
       transition: background-color 0.3s;
+      text-align: center;
     }
-    .producto button.agregar-carrito:hover {
-      background: #0056b3;
+    .ver-producto:hover {
+      background: #000f88;
+    }
+    .etiqueta-oferta {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: crimson;
+      color: #fff;
+      padding: 3px 7px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      user-select: none;
+    }
+    .precio {
+      margin-top: 6px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .precio .tachado {
+      text-decoration: line-through;
+      color: #888;
+      margin-right: 6px;
+      font-weight: normal;
     }
     footer {
-      background: rgba(230, 228, 221, 0.9);
+      background: rgba(230,228,221,0.9);
       padding: 20px 10px;
       max-width: 1200px;
-      margin: 0 auto 20px auto;
-      font-family: Arial, sans-serif;
-      font-size: 0.9rem;
-      color: #333;
+      margin: 0 auto 20px;
       text-align: center;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
     }
-    /* Modal carrito */
     #modal-carrito {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      width: 100vw;
+      height: 100vh;
       background: rgba(0,0,0,0.7);
       display: none;
       justify-content: center;
@@ -197,345 +200,382 @@
       z-index: 11000;
     }
     #modal-carrito .contenido {
-      background: white;
-      max-width: 450px;
-      width: 90%;
-      max-height: 80vh;
-      border-radius: 10px;
-      overflow-y: auto;
+      background: #fff;
       padding: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      width: 90%;
+      max-width: 450px;
+      max-height: 80vh;
+      overflow-y: auto;
       position: relative;
+      box-sizing: border-box;
     }
     #modal-carrito h2 {
-      margin-top: 0;
-      font-family: 'Cooper Black', serif;
-      font-size: 1.8rem;
-      color: #222;
-      user-select: none;
+      margin: 0 0 15px;
+      font-family: 'Cooper Black', cursive;
     }
     #modal-carrito ul {
       list-style: none;
       padding: 0;
-      margin: 0 0 15px 0;
+      margin: 0 0 15px;
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
     }
     #modal-carrito ul li {
-      padding: 10px 0;
+      padding: 8px 12px;
       border-bottom: 1px solid #ddd;
-      font-family: Arial, sans-serif;
-      font-size: 1rem;
-      color: #333;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 0.95rem;
+    }
+    #modal-carrito ul li:last-child {
+      border-bottom: none;
     }
     #modal-carrito button {
-      cursor: pointer;
       padding: 6px 12px;
-      font-weight: bold;
-      border-radius: 6px;
+      margin-right: 8px;
       border: none;
-      transition: background-color 0.3s;
-      font-size: 0.9rem;
-      margin-left: 8px;
-    }
-    #cerrar-carrito {
-      background: #dc3545;
-      color: white;
-      position: absolute;
-      top: 12px;
-      right: 12px;
-    }
-    #cerrar-carrito:hover {
-      background: #a71d2a;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
     }
     #vaciar-carrito {
       background: #6c757d;
-      color: white;
+      color: #fff;
     }
-    #vaciar-carrito:hover {
-      background: #495057;
+    #cerrar-carrito {
+      background: #dc3545;
+      color: #fff;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1rem;
+      line-height: 1;
+      width: 32px;
+      height: 32px;
+      text-align: center;
+      padding: 0;
     }
-    /* Responsive */
-    @media (max-width: 1024px) {
+    @media(max-width: 1024px) {
       main#productos {
-        grid-template-columns: repeat(3, 1fr);
-        margin: 30px auto 60px;
+        grid-template-columns: repeat(3,1fr);
       }
     }
-    @media (max-width: 768px) {
+    @media(max-width: 768px) {
       main#productos {
-        grid-template-columns: repeat(2, 1fr);
-        margin: 30px auto 60px;
-      }
-      nav {
-        justify-content: center;
-        gap: 10px;
-        padding: 10px 8px;
+        grid-template-columns: repeat(2,1fr);
       }
     }
-    @media (max-width: 480px) {
+    @media(max-width: 480px) {
       main#productos {
         grid-template-columns: 1fr;
-        margin: 20px auto 50px;
-      }
-      nav {
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 10px 6px;
-      }
-      nav button, nav select {
-        font-size: 0.9rem;
-        padding: 6px 8px;
-      }
-      .titulo-container {
-        height: 90px;
       }
       h1#titulo {
         font-size: 2rem;
       }
-      .producto {
-        width: 90%;
-        margin: 0 auto;
+      .filtro-bar {
+        justify-content: center;
       }
     }
   </style>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <nav>
+    <button onclick="ir('index.html')" id="btn-inicio">Inicio</button>
     <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
     <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
     <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
-    <button onclick="ir('personalizados.html')" id="btn-personalizados">Productos personalizados</button>
     <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
     <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
-    <button id="btn-carrito" aria-label="Abrir carrito">
-      Carrito
-      <img src="img/carrito.png" alt="Carrito" />
-      <span id="carrito-count" aria-live="polite">0</span>
+    <button id="user-btn" onclick="userAction()">Cargando...</button>
+    <button id="btn-carrito" onclick="abrirCarrito()">
+      <img src="admin/img/carrito.png" alt="Carrito" />
+      <span id="carrito-count">0</span>
     </button>
-    <select id="idioma" onchange="cambiarIdioma(this.value)" aria-label="Seleccionar idioma">
+    <select id="idioma" onchange="cambiarIdioma(this.value)">
       <option value="es">ES</option>
       <option value="en">EN</option>
     </select>
   </nav>
 
   <div class="titulo-container">
-    <h1 id="titulo">Tienda Tech</h1>
+    <h1 id="titulo">Tiendatech</h1>
+  </div>
+
+  <div class="filtro-bar">
+    <input type="text" id="busqueda" placeholder="Buscar producto..." />
+    <label><input type="checkbox" id="solo-ofertas" /> Solo ofertas</label>
+    <select id="orden">
+      <option value="id-asc">ID ↑</option>
+      <option value="id-desc">ID ↓</option>
+      <option value="precio-asc">Precio ↑</option>
+      <option value="precio-desc">Precio ↓</option>
+    </select>
   </div>
 
   <main id="productos"></main>
 
-  <footer id="footer">
+  <footer>
     Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br />
     Dirección: Calle Futura 123, Ciudad Tecno
   </footer>
 
   <!-- Modal carrito -->
-  <div id="modal-carrito" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-carrito">
     <div class="contenido">
-      <h2 id="modal-title">Carrito de Compras</h2>
+      <h2>Carrito de Compras</h2>
       <ul id="lista-carrito"></ul>
-      <button id="vaciar-carrito" aria-label="Vaciar carrito">Vaciar carrito</button>
-      <button id="cerrar-carrito" aria-label="Cerrar carrito">X</button>
+      <button id="vaciar-carrito">Vaciar carrito</button>
+      <button id="cerrar-carrito">X</button>
     </div>
   </div>
 
   <script>
-    const productos = [
-      {
-        id: 1,
-        nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
-        desc: { es: "Reloj inteligente con carga solar y monitoreo de salud.", en: "Smartwatch with solar charging and health tracking." },
-        img: "img/smartwatchsolar.jpg"
+    // Configuración e inicialización Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDwfp67X_IC4P1jFccgqJ980YTZp073AyM",
+      authDomain: "pagina-ejemplo-55edf.firebaseapp.com",
+      projectId: "pagina-ejemplo-55edf",
+      storageBucket: "pagina-ejemplo-55edf.appspot.com",
+      messagingSenderId: "782424417889",
+      appId: "1:782424417889:web:3ae3fc1a16deaf1107ac20",
+      measurementId: "G-S4LQ2F6HEL"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Textos para idiomas
+    const textos = {
+      es: {
+        inicio: "Inicio",
+        masvendido: "Lo más vendido",
+        ofertas: "Ofertas",
+        nuevo: "Lo nuevo",
+        contacto: "Contáctanos",
+        nosotros: "Sobre nosotros",
+        carrito: "Carrito",
+        productoAgregado: "Producto agregado al carrito",
+        carritoVacio: "El carrito está vacío.",
+        login: "Iniciar sesión",
+        logout: "Cerrar sesión",
+        ver: "Ver producto"
       },
-      {
-        id: 2,
-        nombre: { es: "Audífonos 360", en: "360 Headphones" },
-        desc: { es: "Audio envolvente con cancelación de ruido activa.", en: "Immersive sound with active noise cancelling." },
-        img: "img/audifonos.jpg"
-      },
-      {
-        id: 3,
-        nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
-        desc: { es: "Proyector portátil con entrada HDMI y USB.", en: "Portable projector with HDMI and USB input." },
-        img: "img/proyector.jpg"
-      },
-      {
-        id: 4,
-        nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
-        desc: { es: "Lámpara LED con desinfección UV automática.", en: "LED lamp with automatic UV sterilization." },
-        img: "img/lampara.jpg"
-      },
-      {
-        id: 5,
-        nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
-        desc: { es: "Sonido potente y resistente al agua IP67.", en: "Powerful sound, water resistant (IP67)." },
-        img: "img/bocina.jpg"
-      },
-      {
-        id: 6,
-        nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
-        desc: { es: "Diseño cómodo para largas jornadas de trabajo.", en: "Comfortable design for long work hours." },
-        img: "img/mouse.jpg"
-      },
-      {
-        id: 7,
-        nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
-        desc: { es: "Conexión USB-C, teclas retroiluminadas.", en: "USB-C, backlit keys." },
-        img: "img/teclado.jpg"
-      },
-      {
-        id: 8,
-        nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
-        desc: { es: "Pantalla extra portátil para laptop o móvil.", en: "Extra portable screen for laptop or mobile." },
-        img: "img/pantalla.jpg"
-      },
-      {
-        id: 9,
-        nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
-        desc: { es: "Limpieza de aire con filtro HEPA.", en: "Air cleaning with HEPA filter." },
-        img: "img/purificador.jpg"
-      },
-      {
-        id: 10,
-        nombre: { es: "Cámara 360°", en: "360° Camera" },
-        desc: { es: "Captura en tiempo real en 360 grados.", en: "Real-time 360-degree capture." },
-        img: "img/camara.jpg"
-      },
-      {
-        id: 11,
-        nombre: { es: "Drone mini", en: "Mini Drone" },
-        desc: { es: "Vuelo autónomo y grabación HD.", en: "Autonomous flight and HD recording." },
-        img: "img/drone.jpg"
-      },
-      {
-        id: 12,
-        nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
-        desc: { es: "Ideal para aventuras, con doble salida USB.", en: "Perfect for adventures, dual USB." },
-        img: "img/cargador.jpg"
+      en: {
+        inicio: "Home",
+        masvendido: "Best Sellers",
+        ofertas: "Deals",
+        nuevo: "New",
+        contacto: "Contact Us",
+        nosotros: "About Us",
+        carrito: "Cart",
+        productoAgregado: "Product added to cart",
+        carritoVacio: "Cart is empty.",
+        login: "Log in",
+        logout: "Log out",
+        ver: "View product"
       }
+    };
+
+    // Estado inicial
+    let idioma = localStorage.getItem('idioma') || 'es';
+    let carrito = [];
+
+    // Actualiza textos y UI según idioma
+    function actualizarTextos() {
+      ['inicio','masvendido','ofertas','nuevo','contacto','nosotros'].forEach(id => {
+        const btn = document.getElementById('btn-'+id);
+        if (btn) btn.textContent = textos[idioma][id];
+      });
+      const userBtn = document.getElementById('user-btn');
+      userBtn.textContent = auth.currentUser ? textos[idioma].logout : textos[idioma].login;
+      document.getElementById('titulo').textContent = 'Tiendatech';
+      localStorage.setItem('idioma', idioma);
+    }
+
+    // Productos (ejemplo)
+    const productos = [
+      {id:1,nombre:{es:"Smartwatch Solar",en:"Solar Smartwatch"},desc:{es:"Reloj inteligente con carga solar.",en:"Solar powered smartwatch."},img:"admin/img/smartwatchsolar.jpg",oferta:true,precioOriginal:1800,precioOferta:1500},
+      {id:2,nombre:{es:"Audífonos 360",en:"360 Headphones"},desc:{es:"Audio envolvente.",en:"Immersive sound."},img:"admin/img/audifonos.jpg",oferta:true,precioOriginal:1200,precioOferta:900},
+      {id:3,nombre:{es:"Proyector compacto",en:"Compact Projector"},desc:{es:"Proyección HD portátil.",en:"Portable HD projector."},img:"admin/img/proyector.jpg",oferta:true,precioOriginal:3000,precioOferta:2400},
+      {id:4,nombre:{es:"Teclado LED mecánico",en:"Mechanical LED Keyboard"},desc:{es:"RGB y switches mecánicos.",en:"RGB mechanical switches."},img:"admin/img/teclado.jpg",oferta:true,precioOriginal:1100,precioOferta:850},
+      {id:5,nombre:{es:"Bocina bluetooth resistente",en:"Rugged Bluetooth Speaker"},desc:{es:"Resistente al agua IP67.",en:"Water resistant IP67."},img:"admin/img/bocina.jpg",oferta:false,precioOriginal:1500,precioOferta:null},
+      {id:6,nombre:{es:"Mouse ergonómico",en:"Ergonomic Mouse"},desc:{es:"Diseño cómodo.",en:"Comfort design."},img:"admin/img/mouse.jpg",oferta:false,precioOriginal:800,precioOferta:null},
+      {id:7,nombre:{es:"Cargador solar",en:"Solar Charger"},desc:{es:"Energía solar.",en:"Solar power."},img:"admin/img/cargador.jpg",oferta:false,precioOriginal:1000,precioOferta:null},
+      {id:8,nombre:{es:"Reloj táctico",en:"Tactical Watch"},desc:{es:"Multifunción.",en:"Multifunction."},img:"admin/img/reloj.jpg",oferta:false,precioOriginal:1700,precioOferta:null},
+      {id:9,nombre:{es:"Purificador portátil",en:"Portable Air Purifier"},desc:{es:"Filtro HEPA.",en:"HEPA filter."},img:"admin/img/purificador.jpg",oferta:false,precioOriginal:2000,precioOferta:null},
+      {id:10,nombre:{es:"Cámara 360°",en:"360° Camera"},desc:{es:"Visión 360 en real.",en:"360 live capture."},img:"admin/img/camara.jpg",oferta:false,precioOriginal:1800,precioOferta:null},
+      {id:11,nombre:{es:"Drone mini",en:"Mini Drone"},desc:{es:"Vuelo autónomo.",en:"Autonomous flight."},img:"admin/img/drone.jpg",oferta:false,precioOriginal:3500,precioOferta:null},
+      {id:12,nombre:{es:"Lámpara UV",en:"UV Desk Lamp"},desc:{es:"Desinfección UV.",en:"UV sterilization."},img:"admin/img/lampara.jpg",oferta:false,precioOriginal:950,precioOferta:null}
     ];
 
-    // Idioma
-    let idioma = localStorage.getItem('idioma') || 'es';
-    document.getElementById('idioma').value = idioma;
-
-    // Carrito: array de {id, cantidad}
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
+    // Renderiza productos según filtros y orden
     function renderizarProductos() {
-      const contenedor = document.getElementById('productos');
-      contenedor.innerHTML = '';
-      productos.forEach(p => {
+      const cont = document.getElementById('productos');
+      cont.innerHTML = '';
+
+      let arr = [...productos];
+      const q = document.getElementById('busqueda').value.toLowerCase();
+      if (q) arr = arr.filter(p => p.nombre[idioma].toLowerCase().includes(q));
+      if (document.getElementById('solo-ofertas').checked) arr = arr.filter(p => p.oferta);
+
+      const ord = document.getElementById('orden').value;
+      arr.sort((a,b) => {
+        if (ord === 'id-asc') return a.id - b.id;
+        if (ord === 'id-desc') return b.id - a.id;
+        if (ord === 'precio-asc') return (a.oferta ? a.precioOferta : a.precioOriginal) - (b.oferta ? b.precioOferta : b.precioOriginal);
+        if (ord === 'precio-desc') return (b.oferta ? b.precioOferta : b.precioOriginal) - (a.oferta ? a.precioOferta : a.precioOriginal);
+        return 0;
+      });
+
+      arr.forEach(p => {
         const div = document.createElement('div');
         div.className = 'producto';
 
-        div.innerHTML = `
-          <img src="${p.img}" alt="${p.nombre[idioma]}" loading="lazy" />
+        const ofertaTag = p.oferta ? '<div class="etiqueta-oferta">Oferta</div>' : '';
+        const precioHTML = p.oferta
+          ? `<div class="precio"><span class="tachado">$${p.precioOriginal}</span> $${p.precioOferta}</div>`
+          : `<div class="precio">$${p.precioOriginal}</div>`;
+
+        div.innerHTML = `${ofertaTag}
+          <img src="${p.img}" alt="${p.nombre[idioma]}" />
           <h3>${p.nombre[idioma]}</h3>
           <p>${p.desc[idioma]}</p>
-          <a href="producto.html?id=${p.id}" class="ver-producto">Ver</a>
+          ${precioHTML}
+          <a href="producto.html?id=${p.id}" class="ver-producto">${textos[idioma].ver}</a>
+          <button onclick="agregarAlCarrito(${p.id})" style="margin-top:10px; background:#28a745; color:#fff; border:none; border-radius:6px; padding:8px; cursor:pointer; font-weight:bold;">Agregar al carrito</button>
         `;
-
-        contenedor.appendChild(div);
-      });
-
-      // Eventos para botones agregar
-      document.querySelectorAll('.agregar-carrito').forEach(btn => {
-        btn.addEventListener('click', e => {
-          const id = parseInt(e.target.dataset.id);
-          agregarAlCarrito(id);
-        });
+        cont.appendChild(div);
       });
     }
 
+    // Carrito
     function agregarAlCarrito(id) {
       const item = carrito.find(i => i.id === id);
-      if(item){
+      if (item) {
         item.cantidad++;
       } else {
-        carrito.push({id, cantidad:1});
+        carrito.push({id: id, cantidad: 1});
       }
-      localStorage.setItem('carrito', JSON.stringify(carrito));
+      saveCart();
+      renderizarCarrito();
       actualizarContador();
-      alert('Producto agregado al carrito');
+      alert(textos[idioma].productoAgregado);
     }
-
-    function actualizarContador() {
-      const count = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-      document.getElementById('carrito-count').textContent = count;
-    }
-
-    // Mostrar modal carrito
-    const modalCarrito = document.getElementById('modal-carrito');
-    const listaCarrito = document.getElementById('lista-carrito');
 
     function abrirCarrito() {
+      document.getElementById('modal-carrito').style.display = 'flex';
       renderizarCarrito();
-      modalCarrito.style.display = 'flex';
     }
-
     function cerrarCarrito() {
-      modalCarrito.style.display = 'none';
+      document.getElementById('modal-carrito').style.display = 'none';
     }
-
+    function vaciarCarrito() {
+      carrito = [];
+      saveCart();
+      renderizarCarrito();
+      actualizarContador();
+    }
+    function actualizarContador() {
+      const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+      document.getElementById('carrito-count').textContent = total;
+      saveCart();
+    }
     function renderizarCarrito() {
-      listaCarrito.innerHTML = '';
-      if(carrito.length === 0) {
-        listaCarrito.innerHTML = '<li>El carrito está vacío.</li>';
+      const ul = document.getElementById('lista-carrito');
+      ul.innerHTML = '';
+      if (!carrito.length) {
+        ul.innerHTML = `<li>${textos[idioma].carritoVacio}</li>`;
         return;
       }
-      carrito.forEach(item => {
-        const producto = productos.find(p => p.id === item.id);
-        if(!producto) return;
+      carrito.forEach(i => {
+        const p = productos.find(x => x.id === i.id);
         const li = document.createElement('li');
-        li.textContent = `${producto.nombre[idioma]} x${item.cantidad}`;
-        listaCarrito.appendChild(li);
+        li.textContent = `${p.nombre[idioma]} x${i.cantidad}`;
+        ul.appendChild(li);
+      });
+    }
+    function saveCart() {
+      const user = auth.currentUser;
+      if (user) {
+        db.collection('carts').doc(user.uid).set({ items: carrito });
+      } else {
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+      }
+    }
+    function loadCart(uid) {
+      db.collection('carts').doc(uid).get().then(doc => {
+        carrito = doc.exists ? doc.data().items : [];
+        renderizarCarrito();
+        actualizarContador();
       });
     }
 
-    // Vaciar carrito
-    function vaciarCarrito() {
-      carrito = [];
-      localStorage.removeItem('carrito');
-      actualizarContador();
+    // Login/Logout
+    function userAction() {
+      auth.currentUser ? logout() : login();
+    }
+    function login() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider);
+    }
+    function logout() {
+      auth.signOut();
+    }
+
+    // Escucha cambios en autenticación
+    auth.onAuthStateChanged(user => {
+      const userBtn = document.getElementById('user-btn');
+      if (user) {
+        userBtn.textContent = user.displayName || user.email || textos[idioma].logout;
+        userBtn.onclick = logout;
+        loadCart(user.uid);
+      } else {
+        userBtn.textContent = textos[idioma].login;
+        userBtn.onclick = login;
+        carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        renderizarCarrito();
+        actualizarContador();
+      }
+      actualizarTextos();
+      renderizarProductos();
+    });
+
+    // Eventos filtros y búsqueda
+    document.getElementById('busqueda').addEventListener('input', renderizarProductos);
+    document.getElementById('solo-ofertas').addEventListener('change', renderizarProductos);
+    document.getElementById('orden').addEventListener('change', renderizarProductos);
+
+    // Modal carrito botones
+    document.getElementById('vaciar-carrito').addEventListener('click', vaciarCarrito);
+    document.getElementById('cerrar-carrito').addEventListener('click', cerrarCarrito);
+
+    // Cambiar idioma
+    document.getElementById('idioma').value = idioma;
+    function cambiarIdioma(val) {
+      idioma = val;
+      actualizarTextos();
+      renderizarProductos();
       renderizarCarrito();
     }
 
-    // Cambiar idioma
-    function cambiarIdioma(lang) {
-      idioma = lang;
-      localStorage.setItem('idioma', idioma);
+    // Navegación
+    function ir(ruta) {
+      window.location.href = ruta;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      actualizarTextos();
       renderizarProductos();
       actualizarContador();
-      actualizarTextoTitulo();
-    }
-
-    function actualizarTextoTitulo() {
-      const titulo = document.getElementById('titulo');
-      if(idioma === 'es') {
-        titulo.textContent = 'Tienda Tech';
-      } else {
-        titulo.textContent = 'Tech Store';
-      }
-    }
-
-    // Navegación simulada para que no pierdas diseño (puedes cambiar luego)
-    function ir(ruta) {
-  window.location.href = ruta;
-}
-
-    // Eventos botón carrito
-    document.getElementById('btn-carrito').addEventListener('click', abrirCarrito);
-    document.getElementById('cerrar-carrito').addEventListener('click', cerrarCarrito);
-    document.getElementById('vaciar-carrito').addEventListener('click', vaciarCarrito);
-
-    // Iniciar
-    renderizarProductos();
-    actualizarContador();
-    actualizarTextoTitulo();
+    });
   </script>
 </body>
 </html>
->
