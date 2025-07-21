@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Producto en Oferta - Tienda Tech</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #222;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex; justify-content: center; gap: 20px;
+      padding: 12px 10px; z-index: 10000; flex-wrap: wrap; align-items: center;
+    }
+    nav button, nav select {
+      background: transparent; border: none; color: white;
+      font-size: 1rem; cursor: pointer; padding: 6px 12px;
+      border-radius: 6px; transition: background-color 0.3s;
+      font-weight: bold;
+    }
+    nav button:hover, nav select:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    nav img { height: 18px; filter: brightness(100%) contrast(120%); }
+    #carrito-count {
+      background: #f00; border-radius: 50%; color: white;
+      font-weight: bold; font-size: 0.75rem; padding: 2px 6px;
+      margin-left: 4px;
+    }
+    main {
+      max-width: 800px;
+      margin: 100px auto 60px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 24px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    img {
+      max-width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    .precio-original {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 1rem;
+    }
+    .precio-oferta {
+      color: #d90000;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .porcentaje-descuento {
+      color: green;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .volver {
+      display: inline-block;
+      margin-top: 24px;
+      text-decoration: none;
+      color: #0019b8;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #555;
+      padding: 20px 0;
+      background: #ddd;
+    }
+    /* Modal carrito */
+    #modal-carrito {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: none; justify-content: center; align-items: center;
+      z-index: 11000;
+    }
+    #modal-carrito .contenido {
+      background: #fff; padding:20px; border-radius:10px;
+      max-width:450px; width:90%; max-height:80vh; overflow-y:auto;
+      box-shadow:0 0 15px rgba(0,0,0,0.3);
+    }
+    #modal-carrito h2 { margin-top:0; font-family:'Arial Black'; }
+    #modal-carrito ul { list-style:none; padding:0; margin:0 0 15px; }
+    #modal-carrito button {
+      padding:6px 12px; font-weight:bold; border:none;
+      border-radius:6px; cursor:pointer; margin-right:8px;
+    }
+    #cerrar-carrito { background:#dc3545; color:#fff; }
+    #vaciar-carrito { background:#6c757d; color:#fff; }
+    @media (max-width: 1024px) {
+  main {
+    margin: 80px 20px 60px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .precio-oferta {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .porcentaje-descuento {
+    text-align: center;
+  }
+  img {
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    margin: 70px 10px 50px;
+    padding: 15px;
+  }
+  nav {
+    gap: 10px;
+    padding: 10px 6px;
+    flex-wrap: wrap;
+  }
+  nav button, nav select {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  .precio-oferta {
+    font-size: 1.3rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <nav>
+    <button onclick="ir('index.html')" id="btn-inicio">Inicio</button>
+    <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
+    <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
+    <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
+    <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
+    <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
+    <button id="btn-carrito">
+      <img src="admin/img/carrito.png" alt="Carrito"><span id="carrito-count">0</span>
+    </button>
+    <select id="idioma" aria-label="Idioma" onchange="cambiarIdioma(this.value)">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
+
+  <main id="contenido"></main>
+
+  <footer>
+    Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br>
+    Dirección: Calle Futura 123, Ciudad Tecno
+  </footer>
+
+  <div id="modal-carrito">
+    <div class="contenido">
+      <h2 id="modal-title">Carrito de Compras</h2>
+      <ul id="lista-carrito"></ul>
+      <button id="vaciar-carrito" onclick="vaciarCarrito()">Vaciar carrito</button>
+      <button id="cerrar-carrito" onclick="cerrarCarrito()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    const textos = {
+      es: {
+        inicio: "Inicio",
+        masvendido: "Lo más vendido",
+        ofertas: "Ofertas",
+        nuevo: "Lo nuevo",
+        contacto: "Contáctanos",
+        nosotros: "Sobre nosotros",
+        carrito: "Carrito",
+        volver: "← Volver",
+        descuento: "Descuento",
+        precioOriginal: "Precio original",
+        precioOferta: "Precio con oferta"
+      },
+      en: {
+        inicio: "Home",
+        masvendido: "Best Sellers",
+        ofertas: "Deals",
+        nuevo: "New",
+        contacto: "Contact Us",
+        nosotros: "About Us",
+        carrito: "Cart",
+        volver: "← Back",
+        descuento: "Discount",
+        precioOriginal: "Original price",
+        precioOferta: "Offer price"
+      }
+    };
+
+    const idioma = localStorage.getItem("idioma") || "es";
+    document.getElementById("idioma").value = idioma;
+
+    const productos = [
+     { id: 1, nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" }, descripcion: { es: "Reloj inteligente con carga solar.", en: "Smartwatch with solar charging." }, imagen: "admin/img/smartwatchsolar.jpg", precioOriginal: 1800, precioOferta: 1500, oferta: true},
+      { id: 2, nombre: { es: "Audífonos 360", en: "360 Headphones" }, descripcion: { es: "Audio envolvente con cancelación de ruido.", en: "Immersive sound with noise cancelling." }, imagen: "admin/img/audifonos.jpg", precioOriginal: 1500, precioOferta: 1200,  oferta: true},
+      { id: 3, nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" }, descripcion: { es: "Proyector portátil con HDMI y USB.", en: "Portable projector with HDMI and USB." }, imagen: "admin/img/proyector.jpg", precioOriginal: 2500, precioOferta: 2200,  oferta: true},
+      { id: 4, nombre: { es: "Lámpara UV", en: "UV Desk Lamp" }, descripcion: { es: "Lámpara LED con desinfección UV.", en: "LED lamp with UV disinfection." }, imagen: "admin/img/lampara.jpg", precioOriginal: 950, precioOferta: 800,  oferta: true},
+    ];
+
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    function actualizarContador() {
+      document.getElementById("carrito-count").textContent = carrito.reduce((a, b) => a + (b.cantidad || 1), 0);
+    }
+
+    function ir(ruta) {
+      window.location.href = ruta;
+    }
+
+    function cambiarIdioma(idiomaNuevo) {
+      localStorage.setItem("idioma", idiomaNuevo);
+      location.reload();
+    }
+
+    function abrirCarrito() {
+      const ul = document.getElementById("lista-carrito");
+      ul.innerHTML = carrito.length
+        ? carrito.map(i => `<li>${productos.find(p => p.id === i.id)?.nombre[idioma] || "Producto"} x${i.cantidad}</li>`).join("")
+        : "<li>El carrito está vacío.</li>";
+      document.getElementById("modal-carrito").style.display = "flex";
+    }
+    function cerrarCarrito() {
+      document.getElementById("modal-carrito").style.display = "none";
+    }
+    function vaciarCarrito() {
+      localStorage.setItem("carrito", JSON.stringify([]));
+      location.reload();
+    }
+
+    function renderizarProducto() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get("id"));
+      const prod = productos.find(p => p.id === id);
+
+      if (!prod) {
+        document.getElementById("contenido").innerHTML = "<p>Producto no encontrado.</p>";
+        return;
+      }
+
+      const descuento = Math.round(100 * (1 - prod.precioOferta / prod.precioOriginal));
+
+      document.getElementById("contenido").innerHTML = `
+        <h1>${prod.nombre[idioma]}</h1>
+        <img src="${prod.img}" alt="${prod.nombre[idioma]}">
+        <p>${prod.desc[idioma]}</p>
+        <p class="precio-original">${textos[idioma].precioOriginal}: $${prod.precioOriginal}</p>
+        <p class="precio-oferta">${textos[idioma].precioOferta}: $${prod.precioOferta}</p>
+        <p class="porcentaje-descuento">${textos[idioma].descuento}: ${descuento}%</p>
+        <a class="volver" href="ofertas.html">${textos[idioma].volver}</a>
+      `;
+    }
+
+    document.getElementById("btn-carrito").addEventListener("click", abrirCarrito);
+    document.getElementById("cerrar-carrito").addEventListener("click", cerrarCarrito);
+    document.getElementById("vaciar-carrito").addEventListener("click", vaciarCarrito);
+
+    document.getElementById("btn-inicio").textContent = textos[idioma].inicio;
+    document.getElementById("btn-masvendido").textContent = textos[idioma].masvendido;
+    document.getElementById("btn-ofertas").textContent = textos[idioma].ofertas;
+    document.getElementById("btn-nuevo").textContent = textos[idioma].nuevo;
+    document.getElementById("btn-contacto").textContent = textos[idioma].contacto;
+    document.getElementById("btn-nosotros").textContent = textos[idioma].nosotros;
+
+    renderizarProducto();
+    actualizarContador();
+  </script>
+</body>
+</html>
