@@ -316,7 +316,7 @@
     </select>
   </div>
 
-  <main id="productos"></main>
+  <main id="producto.html"></main>
 
   <footer>
     Contacto: ventas@tiendatech.com | Tel: +52 123 456 7890<br />
@@ -345,10 +345,11 @@
         nosotros: "Sobre nosotros",
         carrito: "Carrito",
         productoAgregado: "Producto agregado al carrito",
-        carritoVacio: "El carrito está vacío.",
+        carritoVacio: "El carrito está vacío",
         login: "Iniciar sesión",
         logout: "Cerrar sesión",
         ver: "Ver producto"
+        agregarAlCarrito: "Agregar al carrito"
       },
       en: {
         inicio: "Home",
@@ -359,10 +360,11 @@
         nosotros: "About Us",
         carrito: "Cart",
         productoAgregado: "Product added to cart",
-        carritoVacio: "Cart is empty.",
+        carritoVacio: "Cart is empty",
         login: "Log in",
         logout: "Log out",
         ver: "View product"
+        agregarAlCarrito: "Add to cart"
       }
     };
 
@@ -401,7 +403,6 @@
     // Renderiza productos según filtros y orden
     function renderizarProductos() {
 
-      let arr = [...productos];
       const q = document.getElementById('busqueda').value.toLowerCase();
       if (q) arr = arr.filter(p => p.nombre[idioma].toLowerCase().includes(q));
       if (document.getElementById('solo-ofertas').checked) arr = arr.filter(p => p.oferta);
