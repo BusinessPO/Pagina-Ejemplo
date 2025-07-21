@@ -385,21 +385,178 @@
     }
 
     // Productos (ejemplo)
+     <script>
+    // --- Datos ---
     const productos = [
-      {id:1,nombre:{es:"Smartwatch Solar",en:"Solar Smartwatch"},desc:{es:"Reloj inteligente con carga solar.",en:"Solar powered smartwatch."},img:"img/smartwatchsolar.jpg",oferta:true,precioOriginal:1800,precioOferta:1500},
-      {id:2,nombre:{es:"Audífonos 360",en:"360 Headphones"},desc:{es:"Audio envolvente.",en:"Immersive sound."},img:"img/audifonos.jpg",oferta:true,precioOriginal:1200,precioOferta:900},
-      {id:3,nombre:{es:"Proyector compacto",en:"Compact Projector"},desc:{es:"Proyección HD portátil.",en:"Portable HD projector."},img:"img/proyector.jpg",oferta:true,precioOriginal:3000,precioOferta:2400},
-      {id:4,nombre:{es:"Teclado LED mecánico",en:"Mechanical LED Keyboard"},desc:{es:"RGB y switches mecánicos.",en:"RGB mechanical switches."},img:"img/teclado.jpg",oferta:true,precioOriginal:1100,precioOferta:850},
-      {id:5,nombre:{es:"Bocina bluetooth resistente",en:"Rugged Bluetooth Speaker"},desc:{es:"Resistente al agua IP67.",en:"Water resistant IP67."},img:"img/bocina.jpg",oferta:false,precioOriginal:1500,precioOferta:null},
-      {id:6,nombre:{es:"Mouse ergonómico",en:"Ergonomic Mouse"},desc:{es:"Diseño cómodo.",en:"Comfort design."},img:"img/mouse.jpg",oferta:false,precioOriginal:800,precioOferta:null},
-      {id:7,nombre:{es:"Cargador solar",en:"Solar Charger"},desc:{es:"Energía solar.",en:"Solar power."},img:"img/cargador.jpg",oferta:false,precioOriginal:1000,precioOferta:null},
-      {id:8,nombre:{es:"Reloj táctico",en:"Tactical Watch"},desc:{es:"Multifunción.",en:"Multifunction."},img:"img/reloj.jpg",oferta:false,precioOriginal:1700,precioOferta:null},
-      {id:9,nombre:{es:"Purificador portátil",en:"Portable Air Purifier"},desc:{es:"Filtro HEPA.",en:"HEPA filter."},img:"img/purificador.jpg",oferta:false,precioOriginal:2000,precioOferta:null},
-      {id:10,nombre:{es:"Cámara 360°",en:"360° Camera"},desc:{es:"Visión 360 en real.",en:"360 live capture."},img:"img/camara.jpg",oferta:false,precioOriginal:1800,precioOferta:null},
-      {id:11,nombre:{es:"Drone mini",en:"Mini Drone"},desc:{es:"Vuelo autónomo.",en:"Autonomous flight."},img:"img/drone.jpg",oferta:false,precioOriginal:3500,precioOferta:null},
-      {id:12,nombre:{es:"Lámpara UV",en:"UV Desk Lamp"},desc:{es:"Desinfección UV.",en:"UV sterilization."},img:"img/lampara.jpg",oferta:false,precioOriginal:950,precioOferta:null}
-    ];
-
+  {
+    id: 1,
+    nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
+    desc: {
+      es: "Reloj inteligente con carga solar y monitoreo de salud.",
+      en: "Smartwatch with solar charging and health tracking."
+    },
+    precio: { es: "$1500", en: "$75" },
+    img: "img/smartwatchsolar.jpg",
+    caracteristicas: {
+      es: ["Carga solar", "Monitor de salud", "Pantalla táctil"],
+      en: ["Solar charging", "Health monitor", "Touchscreen"]
+    }
+  },
+  {
+    id: 2,
+    nombre: { es: "Audífonos 360", en: "360 Headphones" },
+    desc: {
+      es: "Audio envolvente con cancelación de ruido activa.",
+      en: "Immersive sound with active noise cancelling."
+    },
+    precio: { es: "$1200", en: "$60" },
+    img: "img/audifonos.jpg",
+    caracteristicas: {
+      es: ["Sonido envolvente", "Cancelación activa de ruido", "Bluetooth 5.0"],
+      en: ["Immersive sound", "Active noise cancelling", "Bluetooth 5.0"]
+    }
+  },
+  {
+    id: 3,
+    nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
+    desc: {
+      es: "Proyector portátil con entrada HDMI y USB.",
+      en: "Portable projector with HDMI and USB input."
+    },
+    precio: { es: "$2200", en: "$110" },
+    img: "img/proyector.jpg",
+    caracteristicas: {
+      es: ["HDMI y USB", "Portátil", "Brillo ajustable"],
+      en: ["HDMI & USB", "Portable", "Adjustable brightness"]
+    }
+  },
+  {
+    id: 4,
+    nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
+    desc: {
+      es: "Lámpara LED con desinfección UV automática.",
+      en: "LED lamp with automatic UV sterilization."
+    },
+    precio: { es: "$800", en: "$40" },
+    img: "img/lampara.jpg",
+    caracteristicas: {
+      es: ["Desinfección UV", "Encendido automático", "Bajo consumo"],
+      en: ["UV sterilization", "Auto on/off", "Low power"]
+    }
+  },
+  {
+    id: 5,
+    nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
+    desc: {
+      es: "Sonido potente y resistente al agua IP67.",
+      en: "Powerful sound, water resistant (IP67)."
+    },
+    precio: { es: "$1300", en: "$65" },
+    img: "img/bocina.jpg",
+    caracteristicas: {
+      es: ["Resistente al agua IP67", "Bluetooth 5.0", "Batería de larga duración"],
+      en: ["IP67 water resistant", "Bluetooth 5.0", "Long battery life"]
+    }
+  },
+  {
+    id: 6,
+    nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
+    desc: {
+      es: "Diseño cómodo para largas jornadas de trabajo.",
+      en: "Comfortable design for long work hours."
+    },
+    precio: { es: "$500", en: "$25" },
+    img: "img/mouse.jpg",
+    caracteristicas: {
+      es: ["Diseño ergonómico", "Sensor ajustable", "USB‑C"],
+      en: ["Ergonomic design", "Adjustable sensor", "USB‑C"]
+    }
+  },
+  {
+    id: 7,
+    nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
+    desc: {
+      es: "Conexión USB‑C, teclas retroiluminadas.",
+      en: "USB‑C connection, backlit keys."
+    },
+    precio: { es: "$1800", en: "$90" },
+    img: "img/teclado.jpg",
+    caracteristicas: {
+      es: ["Retroiluminación RGB", "Switches mecánicos", "Anti‑ghosting"],
+      en: ["RGB backlight", "Mechanical switches", "Anti‑ghosting"]
+    }
+  },
+  {
+    id: 8,
+    nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
+    desc: {
+      es: "Pantalla extra portátil para laptop o móvil.",
+      en: "Extra portable screen for laptop or mobile."
+    },
+    precio: { es: "$2500", en: "$125" },
+    img: "img/pantalla.jpg",
+    caracteristicas: {
+      es: ["FHD", "Plegable", "USB‑C"],
+      en: ["FHD", "Foldable", "USB‑C"]
+    }
+  },
+  {
+    id: 9,
+    nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
+    desc: {
+      es: "Limpieza de aire con filtro HEPA.",
+      en: "Air cleaning with HEPA filter."
+    },
+    precio: { es: "$2000", en: "$100" },
+    img: "img/purificador.jpg",
+    caracteristicas: {
+      es: ["Filtro HEPA", "Bajo ruido", "Portátil"],
+      en: ["HEPA filter", "Low noise", "Portable"]
+    }
+  },
+  {
+    id: 10,
+    nombre: { es: "Cámara 360°", en: "360° Camera" },
+    desc: {
+      es: "Captura en tiempo real en 360 grados.",
+      en: "Real-time 360-degree capture."
+    },
+    precio: { es: "$1800", en: "$90" },
+    img: "img/camara.jpg",
+    caracteristicas: {
+      es: ["Resolución HD", "Visión nocturna", "Estabilización"],
+      en: ["HD resolution", "Night vision", "Stabilization"]
+    }
+  },
+  {
+    id: 11,
+    nombre: { es: "Drone mini", en: "Mini Drone" },
+    desc: {
+      es: "Vuelo autónomo y grabación HD.",
+      en: "Autonomous flight and HD recording."
+    },
+    precio: { es: "$3000", en: "$150" },
+    img: "img/drone.jpg",
+    caracteristicas: {
+      es: ["Vuelo autónomo", "Cámara HD", "Retorno automático"],
+      en: ["Autonomous flight", "HD camera", "Auto return"]
+    }
+  },
+  {
+    id: 12,
+    nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
+    desc: {
+      es: "Ideal para aventuras, con doble salida USB.",
+      en: "Perfect for adventures, dual USB."
+    },
+    precio: { es: "$1600", en: "$80" },
+    img: "img/cargador.jpg",
+    caracteristicas: {
+      es: ["Carga solar", "Dual USB", "Resistente al agua"],
+      en: ["Solar charging", "Dual USB", "Water resistant"]
+    }
+  }
+  
     // Renderiza productos según filtros y orden
     function renderizarProductos() {
 
