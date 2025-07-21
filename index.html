@@ -281,10 +281,6 @@
       }
     }
   </style>
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <nav>
@@ -338,20 +334,6 @@
   </div>
 
   <script>
-    // Configuración e inicialización Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyDwfp67X_IC4P1jFccgqJ980YTZp073AyM",
-      authDomain: "pagina-ejemplo-55edf.firebaseapp.com",
-      projectId: "pagina-ejemplo-55edf",
-      storageBucket: "pagina-ejemplo-55edf.appspot.com",
-      messagingSenderId: "782424417889",
-      appId: "1:782424417889:web:3ae3fc1a16deaf1107ac20",
-      measurementId: "G-S4LQ2F6HEL"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
     // Textos para idiomas
     const textos = {
       es: {
