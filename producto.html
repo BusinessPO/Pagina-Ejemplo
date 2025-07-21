@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Producto - Tienda Tech</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cooper+Black&display=swap');
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('admin/img/textura.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #222;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 10px; padding: 12px;
+      z-index: 1000;
+    }
+    nav button, nav select {
+      background: transparent; border: none;
+      color: white; font-size: 1rem; cursor: pointer;
+      padding: 6px 12px; border-radius: 6px;
+      transition: background-color 0.3s;
+      font-weight: bold;
+    }
+    nav button:hover, nav select:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    nav img { height: 18px; filter: brightness(1) contrast(1.2); }
+    #carrito-count {
+      background: #f00; border-radius: 50%; padding: 2px 6px;
+      font-size: .75rem; font-weight: bold; color: #fff;
+      margin-left: 4px;
+    }
+    .contenedor-producto {
+      margin-top: 100px;
+      max-width: 1000px; margin-inline: auto;
+      background: rgba(64,128,128,0.2);
+      border-radius: 12px; padding: 30px;
+      display: flex; flex-wrap: wrap; gap: 30px;
+    }
+    .producto-img, .producto-info { flex: 1 1 300px; }
+    .producto-img img {
+      width: 100%; max-width: 300px; border-radius: 12px;
+      object-fit: contain;
+    }
+    .producto-info h2 {
+      font-family: 'Cooper Black', serif; font-size: 2rem;
+      margin: 0 0 10px;
+    }
+    .producto-info p { margin: 10px 0; font-size: 1rem; }
+    .producto-info .precio {
+      font-size: 1.3rem; font-weight: bold; color: #007bff;
+    }
+    .producto-info button {
+      padding: 10px 18px; margin-top: 10px;
+      background: #007bff; color: #fff; border: none;
+      border-radius: 6px; cursor: pointer; font-weight: bold;
+      transition: background 0.3s;
+    }
+    .producto-info button:hover { background: #0056b3; }
+    details.caracteristicas { margin-top: 20px; }
+    .comentarios { margin-top: 30px; }
+    .comentarios textarea,
+    #nombre-comentario {
+      width: 100%; padding: 8px; border: 1px solid #ccc;
+      border-radius: 6px; margin-bottom: 10px;
+    }
+    .estrellas {
+      display: flex; flex-direction: row-reverse;
+      gap: 4px; justify-content: flex-start;
+    }
+    .estrellas input { display: none; }
+    .estrellas label {
+      font-size: 1.5rem; color: #ccc; cursor: pointer;
+    }
+    .estrellas input:checked ~ label,
+    .estrellas label:hover,
+    .estrellas label:hover ~ label {
+      color: gold;
+    }
+    .comentario {
+      background: #fff; padding: 10px; margin: 10px 0;
+      border-radius: 6px;
+    }
+    #modal-carrito {
+      position: fixed; top: 0; left: 0; width:100vw; height:100vh;
+      background: rgba(0,0,0,0.7); display: none;
+      justify-content: center; align-items: center; z-index:2000;
+    }
+    #modal-carrito .contenido {
+      background: #fff; padding: 20px; border-radius: 10px;
+      max-width: 90%; max-height: 80vh; overflow-y: auto;
+    }
+    @media (max-width: 600px) {
+      .contenedor-producto { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button onclick="ir('index.html')" id="btn-inicio">Inicio</button>
+    <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
+    <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
+    <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
+    <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
+    <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
+    <button id="btn-carrito">
+      <span id="label-carrito">Carrito</span>
+      <img src="admin/img/carrito.png" alt="Carrito">
+      <span id="carrito-count">0</span>
+    </button>
+    <select id="idioma">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
+
+  <div class="contenedor-producto">
+    <div class="producto-img">
+      <img id="img-producto" src="" alt="">
+    </div>
+    <div class="producto-info">
+      <h2 id="nombre-producto"></h2>
+      <p id="descripcion-producto"></p>
+      <p class="precio" id="precio-producto"></p>
+      <button id="btn-agregar">Agregar al carrito</button>
+
+      <details class="caracteristicas">
+        <summary id="label-caracteristicas">Características</summary>
+        <ul id="lista-caracteristicas"></ul>
+      </details>
+
+      <div class="comentarios">
+        <h3 id="label-comentarios">Comentarios</h3>
+        <div class="estrellas">
+          <input type="radio" name="estrella" id="estrella5" value="5"><label for="estrella5">★</label>
+          <input type="radio" name="estrella" id="estrella4" value="4"><label for="estrella4">★</label>
+          <input type="radio" name="estrella" id="estrella3" value="3"><label for="estrella3">★</label>
+          <input type="radio" name="estrella" id="estrella2" value="2"><label for="estrella2">★</label>
+          <input type="radio" name="estrella" id="estrella1" value="1"><label for="estrella1">★</label>
+        </div>
+        <textarea id="texto-comentario" placeholder="Escribe tu comentario..."></textarea>
+        <input type="text" id="nombre-comentario" placeholder="Tu nombre..." />
+        <button id="btn-enviar-comentario">Enviar</button>
+        <div id="comentarios-guardados"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-carrito">
+    <div class="contenido">
+      <h2 id="modal-title">Carrito de Compras</h2>
+      <ul id="lista-carrito"></ul>
+      <button onclick="vaciarCarrito()" id="vaciar-carrito">Vaciar carrito</button>
+      <button onclick="cerrarCarrito()" id="cerrar-carrito">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    // --- Datos ---
+    const productos = [
+  {
+    id: 1,
+    nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" },
+    desc: {
+      es: "Reloj inteligente con carga solar y monitoreo de salud.",
+      en: "Smartwatch with solar charging and health tracking."
+    },
+    precio: { es: "$1500", en: "$75" },
+    img: "admin/img/smartwatchsolar.jpg",
+    caracteristicas: {
+      es: ["Carga solar", "Monitor de salud", "Pantalla táctil"],
+      en: ["Solar charging", "Health monitor", "Touchscreen"]
+    }
+  },
+  {
+    id: 2,
+    nombre: { es: "Audífonos 360", en: "360 Headphones" },
+    desc: {
+      es: "Audio envolvente con cancelación de ruido activa.",
+      en: "Immersive sound with active noise cancelling."
+    },
+    precio: { es: "$1200", en: "$60" },
+    img: "admin/img/audifonos.jpg",
+    caracteristicas: {
+      es: ["Sonido envolvente", "Cancelación activa de ruido", "Bluetooth 5.0"],
+      en: ["Immersive sound", "Active noise cancelling", "Bluetooth 5.0"]
+    }
+  },
+  {
+    id: 3,
+    nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" },
+    desc: {
+      es: "Proyector portátil con entrada HDMI y USB.",
+      en: "Portable projector with HDMI and USB input."
+    },
+    precio: { es: "$2200", en: "$110" },
+    img: "admin/img/proyector.jpg",
+    caracteristicas: {
+      es: ["HDMI y USB", "Portátil", "Brillo ajustable"],
+      en: ["HDMI & USB", "Portable", "Adjustable brightness"]
+    }
+  },
+  {
+    id: 4,
+    nombre: { es: "Lámpara UV de escritorio", en: "UV Desk Lamp" },
+    desc: {
+      es: "Lámpara LED con desinfección UV automática.",
+      en: "LED lamp with automatic UV sterilization."
+    },
+    precio: { es: "$800", en: "$40" },
+    img: "admin/img/lampara.jpg",
+    caracteristicas: {
+      es: ["Desinfección UV", "Encendido automático", "Bajo consumo"],
+      en: ["UV sterilization", "Auto on/off", "Low power"]
+    }
+  },
+  {
+    id: 5,
+    nombre: { es: "Bocina bluetooth resistente", en: "Rugged Bluetooth Speaker" },
+    desc: {
+      es: "Sonido potente y resistente al agua IP67.",
+      en: "Powerful sound, water resistant (IP67)."
+    },
+    precio: { es: "$1300", en: "$65" },
+    img: "admin/img/bocina.jpg",
+    caracteristicas: {
+      es: ["Resistente al agua IP67", "Bluetooth 5.0", "Batería de larga duración"],
+      en: ["IP67 water resistant", "Bluetooth 5.0", "Long battery life"]
+    }
+  },
+  {
+    id: 6,
+    nombre: { es: "Mouse ergonómico", en: "Ergonomic Mouse" },
+    desc: {
+      es: "Diseño cómodo para largas jornadas de trabajo.",
+      en: "Comfortable design for long work hours."
+    },
+    precio: { es: "$500", en: "$25" },
+    img: "admin/img/mouse.jpg",
+    caracteristicas: {
+      es: ["Diseño ergonómico", "Sensor ajustable", "USB‑C"],
+      en: ["Ergonomic design", "Adjustable sensor", "USB‑C"]
+    }
+  },
+  {
+    id: 7,
+    nombre: { es: "Teclado mecánico RGB", en: "RGB Mechanical Keyboard" },
+    desc: {
+      es: "Conexión USB‑C, teclas retroiluminadas.",
+      en: "USB‑C connection, backlit keys."
+    },
+    precio: { es: "$1800", en: "$90" },
+    img: "admin/img/teclado.jpg",
+    caracteristicas: {
+      es: ["Retroiluminación RGB", "Switches mecánicos", "Anti‑ghosting"],
+      en: ["RGB backlight", "Mechanical switches", "Anti‑ghosting"]
+    }
+  },
+  {
+    id: 8,
+    nombre: { es: "Pantalla plegable 12''", en: "Foldable Display 12''" },
+    desc: {
+      es: "Pantalla extra portátil para laptop o móvil.",
+      en: "Extra portable screen for laptop or mobile."
+    },
+    precio: { es: "$2500", en: "$125" },
+    img: "admin/img/pantalla.jpg",
+    caracteristicas: {
+      es: ["FHD", "Plegable", "USB‑C"],
+      en: ["FHD", "Foldable", "USB‑C"]
+    }
+  },
+  {
+    id: 9,
+    nombre: { es: "Purificador portátil", en: "Portable Air Purifier" },
+    desc: {
+      es: "Limpieza de aire con filtro HEPA.",
+      en: "Air cleaning with HEPA filter."
+    },
+    precio: { es: "$2000", en: "$100" },
+    img: "admin/img/purificador.jpg",
+    caracteristicas: {
+      es: ["Filtro HEPA", "Bajo ruido", "Portátil"],
+      en: ["HEPA filter", "Low noise", "Portable"]
+    }
+  },
+  {
+    id: 10,
+    nombre: { es: "Cámara 360°", en: "360° Camera" },
+    desc: {
+      es: "Captura en tiempo real en 360 grados.",
+      en: "Real-time 360-degree capture."
+    },
+    precio: { es: "$1800", en: "$90" },
+    img: "admin/img/camara.jpg",
+    caracteristicas: {
+      es: ["Resolución HD", "Visión nocturna", "Estabilización"],
+      en: ["HD resolution", "Night vision", "Stabilization"]
+    }
+  },
+  {
+    id: 11,
+    nombre: { es: "Drone mini", en: "Mini Drone" },
+    desc: {
+      es: "Vuelo autónomo y grabación HD.",
+      en: "Autonomous flight and HD recording."
+    },
+    precio: { es: "$3000", en: "$150" },
+    img: "admin/img/drone.jpg",
+    caracteristicas: {
+      es: ["Vuelo autónomo", "Cámara HD", "Retorno automático"],
+      en: ["Autonomous flight", "HD camera", "Auto return"]
+    }
+  },
+  {
+    id: 12,
+    nombre: { es: "Cargador solar portátil", en: "Portable Solar Charger" },
+    desc: {
+      es: "Ideal para aventuras, con doble salida USB.",
+      en: "Perfect for adventures, dual USB."
+    },
+    precio: { es: "$1600", en: "$80" },
+    img: "admin/img/cargador.jpg",
+    caracteristicas: {
+      es: ["Carga solar", "Dual USB", "Resistente al agua"],
+      en: ["Solar charging", "Dual USB", "Water resistant"]
+    }
+  }
+      // … aquí agrega hasta id 12 con mismo formato …
+    ];
+
+    // Estado
+    let idioma = localStorage.getItem("idioma") || "es";
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // Elementos
+    const selIdioma = document.getElementById("idioma");
+    const btnAgregar = document.getElementById("btn-agregar");
+    const btnCarrito = document.getElementById("btn-carrito");
+    const listaCarritoEl = document.getElementById("lista-carrito");
+
+    // Obtener id de URL
+    const idProducto = +new URLSearchParams(location.search).get("id");
+    const producto = productos.find(p=>p.id===idProducto);
+
+    function renderizarProducto(){
+      if(!producto) return;
+      document.getElementById("img-producto").src = producto.img;
+      document.getElementById("nombre-producto").textContent = producto.nombre[idioma];
+      document.getElementById("descripcion-producto").textContent = producto.desc[idioma];
+      document.getElementById("precio-producto").textContent = producto.precio[idioma];
+      const ul = document.getElementById("lista-caracteristicas");
+      ul.innerHTML = "";
+      producto.caracteristicas[idioma].forEach(c=>{
+        const li = document.createElement("li");
+        li.textContent = c;
+        ul.appendChild(li);
+      });
+    }
+
+    function actualizarContador(){
+      document.getElementById("carrito-count").textContent =
+        carrito.reduce((a,i)=>a+i.cantidad,0);
+    }
+
+    function agregarAlCarrito(){
+      const item = carrito.find(i=>i.id===idProducto);
+      if(item) item.cantidad++;
+      else carrito.push({id:idProducto,cantidad:1});
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      actualizarContador();
+      alert(idioma==="es"?"Producto agregado":"Product added");
+    }
+
+    function renderizarCarrito(){
+      listaCarritoEl.innerHTML="";
+      if(carrito.length===0){
+        listaCarritoEl.innerHTML = `<li>${idioma==="es"?"El carrito está vacío":"Cart is empty"}</li>`;
+      } else {
+        carrito.forEach(i=>{
+          const p = productos.find(x=>x.id===i.id);
+          const li = document.createElement("li");
+          li.textContent = `${p.nombre[idioma]} x${i.cantidad}`;
+          listaCarritoEl.appendChild(li);
+        });
+      }
+    }
+
+    function abrirCarrito(){
+      renderizarCarrito();
+      document.getElementById("modal-carrito").style.display="flex";
+    }
+    function cerrarCarrito(){
+      document.getElementById("modal-carrito").style.display="none";
+    }
+    function vaciarCarrito(){
+      carrito=[]; localStorage.removeItem("carrito");
+      actualizarContador(); renderizarCarrito();
+    }
+
+    function mostrarComentarios(){
+      const div = document.getElementById("comentarios-guardados");
+      const key = "comentarios-"+idProducto;
+      const arr = JSON.parse(localStorage.getItem(key))||[];
+      arr.sort((a,b)=>b.estrellas-a.estrellas);
+      div.innerHTML="";
+      arr.forEach(c=>{
+        const d = document.createElement("div");
+        d.className="comentario";
+        d.innerHTML = `<strong>${"★".repeat(c.estrellas)}</strong> <em>${c.usuario} · ${c.fecha}</em><br>${c.texto}`;
+        div.appendChild(d);
+      });
+    }
+
+    function guardarComentario(){
+      const texto = document.getElementById("texto-comentario").value.trim();
+      const estrellas = +document.querySelector('input[name="estrella"]:checked')?.value;
+      const usuario = document.getElementById("nombre-comentario").value.trim();
+      if(!texto||!estrellas||!usuario){
+        return alert(idioma==="es"?"Completa todo":"Fill in all fields");
+      }
+      const key = "comentarios-"+idProducto;
+      const arr = JSON.parse(localStorage.getItem(key))||[];
+      arr.push({
+        texto, estrellas, usuario,
+        fecha: new Date().toLocaleDateString()
+      });
+      localStorage.setItem(key, JSON.stringify(arr));
+      document.getElementById("texto-comentario").value="";
+      document.getElementById("nombre-comentario").value="";
+      mostrarComentarios();
+    }
+
+    function actualizarMenu(){
+      const t = {
+        es:{inicio:"Inicio",mas:"Lo más vendido",ofertas:"Ofertas",nuevo:"Lo nuevo",
+            contacto:"Contáctanos",nosotros:"Sobre nosotros",carrito:"Carrito"},
+        en:{inicio:"Home",mas:"Best Sellers",ofertas:"Deals",nuevo:"New",
+            contacto:"Contact Us",nosotros:"About Us",carrito:"Cart"}
+      }[idioma];
+      document.getElementById("btn-inicio").textContent=t.inicio;
+      document.getElementById("btn-masvendido").textContent=t.mas;
+      document.getElementById("btn-ofertas").textContent=t.ofertas;
+      document.getElementById("btn-nuevo").textContent=t.nuevo;
+      document.getElementById("btn-contacto").textContent=t.contacto;
+      document.getElementById("btn-nosotros").textContent=t.nosotros;
+      document.getElementById("label-carrito").textContent=t.carrito;
+    }
+
+    function actualizarTextosFijos(){
+      document.getElementById("btn-agregar").textContent =
+        idioma==="es"?"Agregar al carrito":"Add to cart";
+      document.getElementById("texto-comentario").placeholder =
+        idioma==="es"?"Escribe tu comentario...":"Write your review...";
+      document.getElementById("nombre-comentario").placeholder =
+        idioma==="es"?"Tu nombre...":"Your name...";
+      document.getElementById("label-caracteristicas").textContent =
+        idioma==="es"?"Características":"Features";
+      document.getElementById("label-comentarios").textContent =
+        idioma==="es"?"Comentarios":"Reviews";
+    }
+
+    function cambiarIdioma(lang){
+      idioma=lang; localStorage.setItem("idioma",lang);
+      renderizarProducto();
+      mostrarComentarios();
+      actualizarContador();
+      actualizarMenu();
+      actualizarTextosFijos();
+    }
+
+    function ir(ruta){ location.href=ruta }
+
+    document.addEventListener("DOMContentLoaded",()=>{
+      selIdioma.value=idioma;
+      selIdioma.onchange=()=>cambiarIdioma(selIdioma.value);
+      btnAgregar.onclick=agregarAlCarrito;
+      btnCarrito.onclick=abrirCarrito;
+      document.getElementById("btn-enviar-comentario")
+        .onclick=guardarComentario;
+
+      renderizarProducto();
+      mostrarComentarios();
+      actualizarContador();
+      actualizarMenu();
+      actualizarTextosFijos();
+    });
+  </script>
+</body>
+</html>
