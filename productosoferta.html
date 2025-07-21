@@ -159,7 +159,7 @@
     <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
     <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
     <button id="btn-carrito">
-      <img src="admin/img/carrito.png" alt="Carrito"><span id="carrito-count">0</span>
+      <img src="img/carrito.png" alt="Carrito"><span id="carrito-count">0</span>
     </button>
     <select id="idioma" aria-label="Idioma" onchange="cambiarIdioma(this.value)">
       <option value="es">ES</option>
@@ -217,10 +217,10 @@
     document.getElementById("idioma").value = idioma;
 
     const productos = [
-     { id: 1, nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" }, descripcion: { es: "Reloj inteligente con carga solar.", en: "Smartwatch with solar charging." }, imagen: "admin/img/smartwatchsolar.jpg", precioOriginal: 1800, precioOferta: 1500, oferta: true},
-      { id: 2, nombre: { es: "Audífonos 360", en: "360 Headphones" }, descripcion: { es: "Audio envolvente con cancelación de ruido.", en: "Immersive sound with noise cancelling." }, imagen: "admin/img/audifonos.jpg", precioOriginal: 1500, precioOferta: 1200,  oferta: true},
-      { id: 3, nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" }, descripcion: { es: "Proyector portátil con HDMI y USB.", en: "Portable projector with HDMI and USB." }, imagen: "admin/img/proyector.jpg", precioOriginal: 2500, precioOferta: 2200,  oferta: true},
-      { id: 4, nombre: { es: "Lámpara UV", en: "UV Desk Lamp" }, descripcion: { es: "Lámpara LED con desinfección UV.", en: "LED lamp with UV disinfection." }, imagen: "admin/img/lampara.jpg", precioOriginal: 950, precioOferta: 800,  oferta: true},
+     { id: 1, nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" }, descripcion: { es: "Reloj inteligente con carga solar.", en: "Smartwatch with solar charging." }, imagen: "img/smartwatchsolar.jpg", precioOriginal: 1800, precioOferta: 1500, oferta: true},
+      { id: 2, nombre: { es: "Audífonos 360", en: "360 Headphones" }, descripcion: { es: "Audio envolvente con cancelación de ruido.", en: "Immersive sound with noise cancelling." }, imagen: "img/audifonos.jpg", precioOriginal: 1500, precioOferta: 1200,  oferta: true},
+      { id: 3, nombre: { es: "Mini Proyector LED", en: "Mini LED Projector" }, descripcion: { es: "Proyector portátil con HDMI y USB.", en: "Portable projector with HDMI and USB." }, imagen: "img/proyector.jpg", precioOriginal: 2500, precioOferta: 2200,  oferta: true},
+      { id: 4, nombre: { es: "Lámpara UV", en: "UV Desk Lamp" }, descripcion: { es: "Lámpara LED con desinfección UV.", en: "LED lamp with UV disinfection." }, imagen: "img/lampara.jpg", precioOriginal: 950, precioOferta: 800,  oferta: true},
     ];
 
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
