@@ -70,7 +70,7 @@
     }
     .titulo-container {
       margin-top: 56px;
-      background: url('admin/img/encabezado.jpg') center/cover no-repeat;
+      background: url('img/encabezado.jpg') center/cover no-repeat;
       height: 120px;
       display: flex;
       justify-content: center;
@@ -296,7 +296,7 @@
     <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
     <button id="user-btn" onclick="userAction()">Cargando...</button>
     <button id="btn-carrito" onclick="abrirCarrito()">
-      <img src="admin/img/carrito.png" alt="Carrito" />
+      <img src="img/carrito.png" alt="Carrito" />
       <span id="carrito-count">0</span>
     </button>
     <select id="idioma" onchange="cambiarIdioma(this.value)">
@@ -402,18 +402,18 @@
 
     // Productos (ejemplo)
     const productos = [
-      {id:1,nombre:{es:"Smartwatch Solar",en:"Solar Smartwatch"},desc:{es:"Reloj inteligente con carga solar.",en:"Solar powered smartwatch."},img:"admin/img/smartwatchsolar.jpg",oferta:true,precioOriginal:1800,precioOferta:1500},
-      {id:2,nombre:{es:"Audífonos 360",en:"360 Headphones"},desc:{es:"Audio envolvente.",en:"Immersive sound."},img:"admin/img/audifonos.jpg",oferta:true,precioOriginal:1200,precioOferta:900},
-      {id:3,nombre:{es:"Proyector compacto",en:"Compact Projector"},desc:{es:"Proyección HD portátil.",en:"Portable HD projector."},img:"admin/img/proyector.jpg",oferta:true,precioOriginal:3000,precioOferta:2400},
-      {id:4,nombre:{es:"Teclado LED mecánico",en:"Mechanical LED Keyboard"},desc:{es:"RGB y switches mecánicos.",en:"RGB mechanical switches."},img:"admin/img/teclado.jpg",oferta:true,precioOriginal:1100,precioOferta:850},
-      {id:5,nombre:{es:"Bocina bluetooth resistente",en:"Rugged Bluetooth Speaker"},desc:{es:"Resistente al agua IP67.",en:"Water resistant IP67."},img:"admin/img/bocina.jpg",oferta:false,precioOriginal:1500,precioOferta:null},
-      {id:6,nombre:{es:"Mouse ergonómico",en:"Ergonomic Mouse"},desc:{es:"Diseño cómodo.",en:"Comfort design."},img:"admin/img/mouse.jpg",oferta:false,precioOriginal:800,precioOferta:null},
-      {id:7,nombre:{es:"Cargador solar",en:"Solar Charger"},desc:{es:"Energía solar.",en:"Solar power."},img:"admin/img/cargador.jpg",oferta:false,precioOriginal:1000,precioOferta:null},
-      {id:8,nombre:{es:"Reloj táctico",en:"Tactical Watch"},desc:{es:"Multifunción.",en:"Multifunction."},img:"admin/img/reloj.jpg",oferta:false,precioOriginal:1700,precioOferta:null},
-      {id:9,nombre:{es:"Purificador portátil",en:"Portable Air Purifier"},desc:{es:"Filtro HEPA.",en:"HEPA filter."},img:"admin/img/purificador.jpg",oferta:false,precioOriginal:2000,precioOferta:null},
-      {id:10,nombre:{es:"Cámara 360°",en:"360° Camera"},desc:{es:"Visión 360 en real.",en:"360 live capture."},img:"admin/img/camara.jpg",oferta:false,precioOriginal:1800,precioOferta:null},
-      {id:11,nombre:{es:"Drone mini",en:"Mini Drone"},desc:{es:"Vuelo autónomo.",en:"Autonomous flight."},img:"admin/img/drone.jpg",oferta:false,precioOriginal:3500,precioOferta:null},
-      {id:12,nombre:{es:"Lámpara UV",en:"UV Desk Lamp"},desc:{es:"Desinfección UV.",en:"UV sterilization."},img:"admin/img/lampara.jpg",oferta:false,precioOriginal:950,precioOferta:null}
+      {id:1,nombre:{es:"Smartwatch Solar",en:"Solar Smartwatch"},desc:{es:"Reloj inteligente con carga solar.",en:"Solar powered smartwatch."},img:"img/smartwatchsolar.jpg",oferta:true,precioOriginal:1800,precioOferta:1500},
+      {id:2,nombre:{es:"Audífonos 360",en:"360 Headphones"},desc:{es:"Audio envolvente.",en:"Immersive sound."},img:"img/audifonos.jpg",oferta:true,precioOriginal:1200,precioOferta:900},
+      {id:3,nombre:{es:"Proyector compacto",en:"Compact Projector"},desc:{es:"Proyección HD portátil.",en:"Portable HD projector."},img:"img/proyector.jpg",oferta:true,precioOriginal:3000,precioOferta:2400},
+      {id:4,nombre:{es:"Teclado LED mecánico",en:"Mechanical LED Keyboard"},desc:{es:"RGB y switches mecánicos.",en:"RGB mechanical switches."},img:"img/teclado.jpg",oferta:true,precioOriginal:1100,precioOferta:850},
+      {id:5,nombre:{es:"Bocina bluetooth resistente",en:"Rugged Bluetooth Speaker"},desc:{es:"Resistente al agua IP67.",en:"Water resistant IP67."},img:"img/bocina.jpg",oferta:false,precioOriginal:1500,precioOferta:null},
+      {id:6,nombre:{es:"Mouse ergonómico",en:"Ergonomic Mouse"},desc:{es:"Diseño cómodo.",en:"Comfort design."},img:"img/mouse.jpg",oferta:false,precioOriginal:800,precioOferta:null},
+      {id:7,nombre:{es:"Cargador solar",en:"Solar Charger"},desc:{es:"Energía solar.",en:"Solar power."},img:"img/cargador.jpg",oferta:false,precioOriginal:1000,precioOferta:null},
+      {id:8,nombre:{es:"Reloj táctico",en:"Tactical Watch"},desc:{es:"Multifunción.",en:"Multifunction."},img:"img/reloj.jpg",oferta:false,precioOriginal:1700,precioOferta:null},
+      {id:9,nombre:{es:"Purificador portátil",en:"Portable Air Purifier"},desc:{es:"Filtro HEPA.",en:"HEPA filter."},img:"img/purificador.jpg",oferta:false,precioOriginal:2000,precioOferta:null},
+      {id:10,nombre:{es:"Cámara 360°",en:"360° Camera"},desc:{es:"Visión 360 en real.",en:"360 live capture."},img:"img/camara.jpg",oferta:false,precioOriginal:1800,precioOferta:null},
+      {id:11,nombre:{es:"Drone mini",en:"Mini Drone"},desc:{es:"Vuelo autónomo.",en:"Autonomous flight."},img:"img/drone.jpg",oferta:false,precioOriginal:3500,precioOferta:null},
+      {id:12,nombre:{es:"Lámpara UV",en:"UV Desk Lamp"},desc:{es:"Desinfección UV.",en:"UV sterilization."},img:"img/lampara.jpg",oferta:false,precioOriginal:950,precioOferta:null}
     ];
 
     // Renderiza productos según filtros y orden
