@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> Contáctanos- Tienda Tech</title>
+<style>
+      .ver-producto {
+  background: #0019b8;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+  display: inline-block;
+}
+.ver-producto:hover {
+  background: #0019b8;
+}
+    @import url('https://fonts.googleapis.com/css2?family=Cooper+Black&display=swap');
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('admin/img/textura.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #e6e4dd;
+      color: #222;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px 10px;
+      z-index: 10000;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    nav button, nav select {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    nav button:hover, nav select:hover {
+  background: rgba(255 255 255 / 0.2);
+}
+    nav button img {
+      vertical-align: middle;
+      height: 18px;
+      user-select: none;
+      pointer-events: none;
+      filter: brightness(100%) contrast(120%);
+    }
+    /* Carrito contador */
+    #carrito-count {
+      background: #f00;
+      border-radius: 50%;
+      color: white;
+      font-weight: bold;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      margin-left: 2px;
+      vertical-align: top;
+      user-select: none;
+    }
+    .titulo-container {
+      margin-top: 56px;
+      background-image: url('admin/img/encabezado.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow: inset 0 0 50px 25px rgba(230,228,221,0.9);
+    }
+    h1#titulo {
+      font-family: 'Cooper Black', serif;
+      font-size: 3rem;
+      color: rgb(12, 26, 66);
+      text-shadow:
+        -1px -1px 0 #afcfc4,
+         1px -1px 0 #afcfc4,
+        -1px  1px 0 #afcfc4,
+         1px  1px 0 #afcfc4;
+      margin: 0;
+      padding: 0 20px;
+      user-select: none;
+    }
+    .contacto-info p {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+#form-contacto {
+  display: none;
+}
+    /* Modal carrito */
+    #modal-carrito {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 11000;
+    }
+    #modal-carrito .contenido {
+      background: white;
+      max-width: 450px;
+      width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    #modal-carrito h2 {
+      margin-top: 0;
+      font-family: 'Cooper Black', serif;
+      font-size: 1.8rem;
+      color: #222;
+      user-select: none;
+    }
+    #modal-carrito ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 15px 0;
+    }
+    #modal-carrito ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #modal-carrito button {
+      cursor: pointer;
+      padding: 6px 12px;
+      font-weight: bold;
+      border-radius: 6px;
+      border: none;
+      transition: background-color 0.3s;
+      font-size: 0.9rem;
+      margin-left: 8px;
+    }
+    #cerrar-carrito {
+      background: #dc3545;
+      color: white;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+    #cerrar-carrito:hover {
+      background: #a71d2a;
+    }
+    #vaciar-carrito {
+      background: #6c757d;
+      color: white;
+    }
+    #vaciar-carrito:hover {
+      background: #495057;
+    }
+    /* Responsive */
+    @media (max-width: 1024px) {
+      main#productos {
+        grid-template-columns: repeat(3, 1fr);
+        margin: 30px auto 60px;
+      }
+    }
+    @media (max-width: 768px) {
+      main#productos {
+        grid-template-columns: repeat(2, 1fr);
+        margin: 30px auto 60px;
+      }
+      nav {
+        justify-content: center;
+        gap: 10px;
+        padding: 10px 8px;
+      }
+    }
+    @media (max-width: 480px) {
+      main#productos {
+        grid-template-columns: 1fr;
+        margin: 20px auto 50px;
+      }
+      nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 6px;
+      }
+      nav button, nav select {
+        font-size: 0.9rem;
+        padding: 6px 8px;
+      }
+      .titulo-container {
+        height: 90px;
+      }
+      h1#titulo {
+        font-size: 2rem;
+      }
+      .producto {
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+  <button onclick="ir('index.html')" id="btn-inicio">Inicio</button>
+  <button onclick="ir('masvendido.html')" id="btn-masvendido">Lo más vendido</button>
+  <button onclick="ir('ofertas.html')" id="btn-ofertas">Ofertas</button>
+  <button onclick="ir('nuevo.html')" id="btn-nuevo">Lo nuevo</button>
+  <button onclick="ir('contacto.html')" id="btn-contacto">Contáctanos</button>
+  <button onclick="ir('nosotros.html')" id="btn-nosotros">Sobre nosotros</button>
+  <button id="btn-carrito" aria-label="Abrir carrito">
+    Carrito
+    <img src="admin/img/carrito.png" alt="Carrito" />
+    <span id="carrito-count" aria-live="polite">0</span>
+  </button>
+  <select id="idioma" onchange="cambiarIdioma(this.value)" aria-label="Seleccionar idioma">
+    <option value="es">ES</option>
+    <option value="en">EN</option>
+  </select>
+</nav>
+
+  <div class="titulo-container">
+    <h1 id="titulo">Contáctanos</h1>
+  </div>
+ <main class="contacto-info">
+  <p><strong>📍 Dirección:</strong> Calle Futura 123, Ciudad Tecno</p>
+  <p><strong>📞 Teléfono:</strong> +52 123 456 7890</p>
+  <p><strong>📧 Correo electrónico:</strong> ventas@tiendatech.com</p>
+  <p><strong>🕒 Horarios:</strong> Lunes a Viernes, 9:00 a.m. - 6:00 p.m.</p>
+
+  <main id="productos"></main>
+
+  <!-- Modal carrito -->
+  <div id="modal-carrito" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="contenido">
+      <h2 id="modal-title">Carrito de Compras</h2>
+      <ul id="lista-carrito"></ul>
+      <button id="vaciar-carrito" aria-label="Vaciar carrito">Vaciar carrito</button>
+      <button id="cerrar-carrito" aria-label="Cerrar carrito">X</button>
+    </div>
+  </div>
+
+  <script>
+    function actualizarTextoMenu() {
+  const textos = {
+    es: {
+      inicio: "Inicio",
+      masvendido: "Lo más vendido",
+      ofertas: "Ofertas",
+      nuevo: "Lo nuevo",
+      contacto: "Contáctanos",
+      nosotros: "Sobre nosotros",
+      carrito: "Carrito"
+    },
+    en: {
+      inicio: "Home",
+      masvendido: "Best Sellers",
+      ofertas: "Deals",
+      nuevo: "New",
+      contacto: "Contact Us",
+      nosotros: "About Us",
+      carrito: "Cart"
+    }
+  };
+
+  const t = textos[idioma];
+
+  document.getElementById("btn-inicio").textContent = t.inicio;
+  document.getElementById("btn-masvendido").textContent = t.masvendido;
+  document.getElementById("btn-ofertas").textContent = t.ofertas;
+  document.getElementById("btn-nuevo").textContent = t.nuevo;
+  document.getElementById("btn-contacto").textContent = t.contacto;
+  document.getElementById("btn-nosotros").textContent = t.nosotros;
+  document.getElementById("btn-carrito").childNodes[0].textContent = t.carrito + " ";
+}
+
+  let idioma = localStorage.getItem('idioma') || 'es';
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+  function actualizarContador() {
+    const count = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    document.getElementById('carrito-count').textContent = count;
+  }
+
+  const modalCarrito = document.getElementById('modal-carrito');
+  const listaCarrito = document.getElementById('lista-carrito');
+
+  function abrirCarrito() {
+    renderizarCarrito();
+    modalCarrito.style.display = 'flex';
+  }
+
+  function cerrarCarrito() {
+    modalCarrito.style.display = 'none';
+  }
+
+  function renderizarCarrito() {
+    listaCarrito.innerHTML = '';
+    if (carrito.length === 0) {
+      listaCarrito.innerHTML = '<li>El carrito está vacío.</li>';
+      return;
+    }
+    carrito.forEach(item => {
+      const producto = productos.find(p => p.id === item.id);
+      if (!producto) return;
+      const li = document.createElement('li');
+      li.textContent = `${producto.nombre[idioma]} x${item.cantidad}`;
+      listaCarrito.appendChild(li);
+    });
+  }
+
+  function vaciarCarrito() {
+    carrito = [];
+    localStorage.removeItem('carrito');
+    actualizarContador();
+    renderizarCarrito();
+  }
+
+  function cambiarIdioma(lang) {
+    idioma = lang;
+    localStorage.setItem('idioma', idioma);
+    renderizarProductos();
+    actualizarContador();
+    actualizarTextoTitulo();
+    actualizarTextoMenu();
+  }
+function actualizarTextoTitulo() {
+  const titulo = document.getElementById('titulo');
+  if (idioma === 'es') {
+    titulo.textContent = 'Contáctanos';
+    document.title = 'Contáctanos - Tienda Tech';
+  } else {
+    titulo.textContent = 'Contact Us';
+    document.title = 'Contact Us - Tech Store';
+  }
+}
+
+  function ir(ruta) {
+    window.location.href = ruta;
+  }
+
+  // Esperar a que cargue el DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    const selectIdioma = document.getElementById('idioma');
+    if (selectIdioma) {
+      selectIdioma.value = idioma;
+      selectIdioma.addEventListener('change', () => cambiarIdioma(selectIdioma.value));
+    }
+
+    renderizarProductos();
+    actualizarContador();
+    actualizarTextoTitulo();
+    actualizarTextoMenu();
+
+    document.getElementById('btn-carrito').addEventListener('click', abrirCarrito);
+    document.getElementById('cerrar-carrito').addEventListener('click', cerrarCarrito);
+    document.getElementById('vaciar-carrito').addEventListener('click', vaciarCarrito);
+  });
+</script>
+</body>
+</html>
