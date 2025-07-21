@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrito - Tienda Tech</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: url('admin/img/textura.jpg') center/cover no-repeat fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+      z-index: 1000;
+      flex-wrap: wrap;
+    }
+
+    nav button, nav select {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    nav button:hover, nav select:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .carrito-modal {
+      background: white;
+      width: 33%;
+      min-width: 300px;
+      max-width: 450px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+      z-index: 2000;
+      margin-top: 100px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px 0;
+      font-size: 0.95rem;
+    }
+
+    th {
+      color: #777;
+    }
+
+    td {
+      color: #222;
+    }
+
+    #total {
+      text-align: right;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 15px;
+    }
+
+    .btn-pagar {
+      width: 100%;
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .btn-pagar:hover {
+      background: #084298;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 60px;
+      padding: 20px;
+      width: 100%;
+      background: rgba(255,255,255,0.6);
+      position: relative;
+    }
+
+    @media (max-width: 600px) {
+      .carrito-modal {
+        width: 90%;
+        margin-top: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <button onclick="ir('index.html')">Inicio</button>
+    <button onclick="ir('masvendido.html')">Lo más vendido</button>
+    <button onclick="ir('ofertas.html')">Ofertas</button>
+    <button onclick="ir('nuevo.html')">Lo nuevo</button>
+    <button onclick="ir('contacto.html')">Contáctanos</button>
+    <button onclick="ir('nosotros.html')">Sobre nosotros</button>
+    <button onclick="ir('carrito.html')">Carrito</button>
+    <select id="idioma" onchange="cambiarIdioma(this.value)">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
+
+  <div class="carrito-modal">
+    <h2 id="titulo">Carrito</h2>
+    <div id="contenido-carrito"></div>
+  </div>
+
+  <footer>
+    Contacto: ventas@tiendatech.com | +52 123 456 7890<br>
+    Dirección: Calle Futura 123, Ciudad Tecno
+  </footer>
+
+  <script>
+    const productos = [
+      { id: 1, nombre: { es: "Smartwatch Solar", en: "Solar Smartwatch" }, precio: 899 },
+      { id: 12, nombre: { es: "Cargador Solar", en: "Solar Charger" }, precio: 699 },
+      { id: 10, nombre: { es: "Cámara 360°", en: "360° Camera" }, precio: 1249 },
+      { id: 8, nombre: { es: "Pantalla Plegable", en: "Foldable Display" }, precio: 1550 }
+    ];
+    let idioma = localStorage.getItem("idioma") || "es";
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    function ir(ruta) { window.location.href = ruta; }
+
+    function cambiarIdioma(lang) {
+      idioma = lang;
+      localStorage.setItem("idioma", idioma);
+      renderizarCarrito();
+      document.getElementById("titulo").textContent = idioma === "es" ? "Carrito" : "Cart";
+      document.title = idioma === "es" ? "Carrito - Tienda Tech" : "Cart - Tech Store";
+    }
+
+    function renderizarCarrito() {
+      const contenedor = document.getElementById("contenido-carrito");
+      if (carrito.length === 0) {
+        contenedor.innerHTML = `<p>${idioma === "es" ? "Tu carrito está vacío." : "Your cart is empty."}</p>`;
+        return;
+      }
+      let html = "<table><thead><tr><th>" + (idioma === "es" ? "Producto" : "Product") + "</th><th>" + (idioma === "es" ? "Cant." : "Qty") + "</th><th>Subtotal</th></tr></thead><tbody>";
+      let total = 0;
+      carrito.forEach(item => {
+        const p = productos.find(prod => prod.id === item.id);
+        if (!p) return;
+        const subtotal = p.precio * item.cantidad;
+        total += subtotal;
+        html += `<tr><td>${p.nombre[idioma]}</td><td>${item.cantidad}</td><td>$${subtotal}</td></tr>`;
+      });
+      html += `</tbody></table><p id="total">${idioma === "es" ? "Total" : "Total"}: $${total}</p><button class="btn-pagar" onclick="pagar()">${idioma === "es" ? "Pagar ahora" : "Pay now"}</button>`;
+      contenedor.innerHTML = html;
+    }
+
+    function pagar() {
+      alert(idioma === "es" ? "Gracias por tu compra." : "Thank you for your purchase.");
+      carrito = [];
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      renderizarCarrito();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("idioma").value = idioma;
+      renderizarCarrito();
+    });
+  </script>
+</body>
+</html>
